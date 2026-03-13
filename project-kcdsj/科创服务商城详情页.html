@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创服务商城详情 - 科创大数据平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .sidebar-item {
+                transition: all 0.2s ease;
+            }
+            .sidebar-item:hover {
+                background: rgba(22, 93, 255, 0.1);
+            }
+            .sidebar-item.active {
+                background: rgba(22, 93, 255, 0.1);
+                border-left: 3px solid #165DFF;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            }
+            .btn-primary {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #0F4ED9 0%, #0DB8A6 100%);
+            }
+            .input-focus {
+                transition: all 0.3s ease;
+            }
+            .input-focus:focus {
+                border-color: #165DFF;
+                box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+            }
+            .product-card {
+                transition: all 0.3s ease;
+            }
+            .product-card:hover {
+                border-color: #165DFF;
+            }
+        }
+
+        /* 多级菜单样式 */
+        .mega-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            z-index: 1000;
+            margin-top: 8px;
+        }
+
+        .service-menu-container:hover .mega-menu {
+            display: block;
+        }
+
+        .menu-left {
+            width: 180px;
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .menu-left-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .menu-left-item:hover,
+        .menu-left-item.active {
+            background: white;
+            color: #165DFF;
+            font-weight: 500;
+        }
+
+        .menu-left-item.active {
+            border-left: 3px solid #165DFF;
+        }
+
+        .menu-right {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .menu-section {
+            display: none;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        .menu-category-title {
+            color: #165DFF;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-category-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: #165DFF;
+            border-radius: 2px;
+        }
+
+        .menu-items-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item-link {
+            color: #64748b;
+            font-size: 13px;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .menu-item-link:hover {
+            color: #165DFF;
+        }
+
+        .menu-divider {
+            width: 1px;
+            height: 12px;
+            background: #e2e8f0;
+            margin: 0 4px;
+        }
+
+        .tab-active {
+            border-bottom: 2px solid #165DFF;
+            color: #165DFF;
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-xl">科</span>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-primary">科派派</h1>
+                            <p class="text-xs text-gray-medium">湖北科创大数据平台</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 导航菜单 -->
+                    <nav class="hidden md:flex items-center space-x-6 ml-10">
+                        <a href="科创大数据平台智能体矩阵.html" class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                        <a href="政策广场.html" class="font-medium text-gray-dark hover:text-primary transition-colors">政策广场</a>
+                        <div class="service-menu-container relative">
+                            <a href="科创服务商城详情页.html" class="font-medium text-primary border-b-2 border-primary pb-1 flex items-center gap-1">
+                                服务商城
+                                <i class="fa fa-angle-down text-xs transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            <!-- 大型下拉菜单 -->
+                            <div class="mega-menu">
+                                <div class="flex">
+                                    <!-- 左侧一级分类 -->
+                                    <div class="menu-left">
+                                        <div class="menu-left-item active" data-category="innovation">
+                                            <span>科创服务</span>
+                                            <i class="fa fa-angle-right text-xs"></i>
+                                        </div>
+                                        <div class="menu-left-item" data-category="enterprise">
+                                            <span>企业服务</span>
+                                            <i class="fa fa-angle-right text-xs"></i>
+                                        </div>
+                                        <div class="menu-left-item" data-category="finance">
+                                            <span>财税服务</span>
+                                            <i class="fa fa-angle-right text-xs"></i>
+                                        </div>
+                                        <div class="menu-left-item" data-category="property">
+                                            <span>知识产权</span>
+                                            <i class="fa fa-angle-right text-xs"></i>
+                                        </div>
+                                        <div class="menu-left-item" data-category="legal">
+                                            <span>法律服务</span>
+                                            <i class="fa fa-angle-right text-xs"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 右侧详细内容 -->
+                                    <div class="menu-right">
+                                        <!-- 科创服务 -->
+                                        <div class="menu-section active" id="menu-innovation">
+                                            <div class="menu-category-title">创新服务</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">高新技术企业认定</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">贯标申请服务</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">研发加计扣除</a>
+                                            </div>
+                                            
+                                            <div class="menu-category-title">科技项目</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">重大专项</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">重点研发计划</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">科技计划</a>
+                                            </div>
+                                            
+                                            <div class="menu-category-title">资质体系认证</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO14001环境管理体系认证</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO45001职业健康安全管理体系</a>
+                                            </div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO27001</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO20000</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO22000</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">HACCP</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">GB/T50430</a>
+                                            </div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO27017</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">ISO27018</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">AAA信用认证</a>
+                                            </div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">CCRC软件开发安全服务资质</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">CCRC信息系统安全集成服务资质</a>
+                                            </div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">CCRC应急处理服务资质认证</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 企业服务 -->
+                                        <div class="menu-section" id="menu-enterprise">
+                                            <div class="menu-category-title">工商注册</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">公司注册</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">工商变更</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">公司注销</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">地址挂靠</a>
+                                            </div>
+                                            
+                                            <div class="menu-category-title">人力资源</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">社保代缴</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">公积金代缴</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">劳务派遣</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">猎头服务</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 财税服务 -->
+                                        <div class="menu-section" id="menu-finance">
+                                            <div class="menu-category-title">代理记账</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">小规模记账</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">一般纳税人记账</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">出口退税</a>
+                                            </div>
+                                            
+                                            <div class="menu-category-title">税务筹划</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">税收洼地</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">合理避税</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">税务咨询</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 知识产权 -->
+                                        <div class="menu-section" id="menu-property">
+                                            <div class="menu-category-title">专利申请</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">发明专利</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">实用新型专利</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">外观设计专利</a>
+                                            </div>
+                                            
+                                            <div class="menu-category-title">商标服务</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">商标注册</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">商标转让</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">商标续展</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">商标变更</a>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 法律服务 -->
+                                        <div class="menu-section" id="menu-legal">
+                                            <div class="menu-category-title">合同服务</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">合同审查</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">合同起草</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">合同模板</a>
+                                            </div>
+                                            
+                                            <div class="menu-category-title">法律顾问</div>
+                                            <div class="menu-items-row">
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">常年法律顾问</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">专项法律顾问</a>
+                                                <span class="menu-divider"></span>
+                                                <a href="科创服务商城详情页.html" class="menu-item-link">法律咨询</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group">
+                            <a href="标准服务产品.html" class="font-medium text-gray-dark hover:text-primary transition-colors flex items-center gap-1">
+                                标准服务产品
+                                <i class="fa fa-angle-down text-xs transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            <!-- 下拉菜单 -->
+                            <div class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <div class="py-1">
+                                    <a href="标准服务产品.html#growth-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors">企业成长陪跑包</a>
+                                    <a href="标准服务产品.html#quality-plan" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors">提质计划包</a>
+                                    <a href="标准服务产品.html#ipo-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors">上市包</a>
+                                    <a href="标准服务产品.html#special-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors">专项解决包</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">科创大数据</a>
+                    </nav>
+                </div>
+                
+                <!-- 右侧登录注册 -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-dark hover:text-primary transition-colors">登录</a>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">注册</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 服务详情内容 -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="flex gap-6">
+            <!-- 左侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-sm p-4 h-full">
+                    <!-- 科创管家智能体矩阵标题 -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-bold text-lg">科创管家智能体矩阵</h2>
+                        <button class="text-xs text-primary hover:underline">更多</button>
+                    </div>
+                    
+                    <!-- 新对话 -->
+                    <div class="mb-4">
+                        <button class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus"></i>
+                            <span>新对话</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 最近对话 -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">最近对话</h3>
+                        <div class="space-y-1">
+                            <div class="p-3 rounded-lg flex items-center gap-3 hover:bg-gray-50 transition-colors">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm">新对话</span>
+                            </div>
+                            <div class="p-3 rounded-lg flex items-center gap-3 hover:bg-gray-50 transition-colors">
+                                <div class="w-2 h-2 bg-gray-medium rounded-full"></div>
+                                <span class="text-sm">科创企业有什么优惠政策</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特色应用 -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">特色应用</h3>
+                        <div class="space-y-1">
+                            <div class="p-3 rounded-lg flex items-center gap-3 hover:bg-gray-50 transition-colors">
+                                <i class="fa fa-bar-chart text-primary"></i>
+                                <span class="text-sm">测评智能体矩阵</span>
+                            </div>
+                            <div class="p-3 rounded-lg flex items-center gap-3 hover:bg-gray-50 transition-colors">
+                                <i class="fa fa-lightbulb-o text-primary"></i>
+                                <span class="text-sm">知识产权服务助手</span>
+                            </div>
+                            <div class="p-3 rounded-lg flex items-center gap-3 hover:bg-gray-50 transition-colors">
+                                <i class="fa fa-file-text-o text-primary"></i>
+                                <span class="text-sm">政策服务智能体</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 底部用户信息 -->
+                    <div class="mt-6 pt-4 border-t border-gray-light">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <i class="fa fa-user text-gray-medium"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">用户名称</p>
+                                <p class="text-xs text-gray-medium">普通用户</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中间主内容 -->
+            <div class="flex-1">
+                <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                    <!-- 面包屑导航 -->
+                    <nav class="text-sm text-gray-medium mb-6">
+                        <a href="科创大数据平台智能体矩阵.html" class="hover:text-primary">首页</a>
+                        <span class="mx-2">/</span>
+                        <a href="科创服务商城详情页.html" class="hover:text-primary">服务商城</a>
+                        <span class="mx-2">/</span>
+                        <span class="text-gray-dark">高新技术企业认定</span>
+                    </nav>
+
+                    <!-- 服务主图和基本信息 -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <i class="fa fa-certificate text-primary text-xl"></i>
+                                <h2 class="font-bold text-lg">高新技术企业认定服务</h2>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-primary text-xs rounded">热门服务</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-600 text-xs rounded">官方认证</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row gap-6 mb-6">
+                            <!-- 服务图片 -->
+                            <div class="md:w-1/3">
+                                <div class="aspect-square bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-certificate text-6xl text-primary"></i>
+                                </div>
+                            </div>
+                            <!-- 服务信息 -->
+                            <div class="md:w-2/3">
+                                <p class="text-sm text-gray-medium mb-4">专业团队全程代办，助力企业快速获得高新技术企业资质，享受税收优惠政策</p>
+                                
+                                <!-- 评分和销量 -->
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400 text-sm">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-o"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-medium ml-2">4.8分</span>
+                                    </div>
+                                    <span class="text-sm text-gray-medium">月销 1,234 单</span>
+                                    <span class="text-sm text-gray-medium">好评率 98%</span>
+                                </div>
+
+                                <!-- 价格 -->
+                                <div class="mb-4">
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-sm text-gray-dark">服务价格</span>
+                                        <span class="text-3xl font-bold text-danger">¥15,800</span>
+                                        <span class="text-gray-medium line-through">¥25,000</span>
+                                        <span class="px-2 py-1 bg-red-500 text-white text-xs rounded">限时优惠</span>
+                                    </div>
+                                    <div class="text-sm text-gray-medium mt-2">
+                                        <i class="fa fa-clock-o mr-1"></i>服务周期：3-6个月
+                                    </div>
+                                </div>
+
+                                <!-- 服务规格选择 -->
+                                <div class="mb-4">
+                                    <label class="text-sm font-medium text-dark mb-2 block">选择服务类型</label>
+                                    <div class="flex gap-3">
+                                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">首次认定</button>
+                                        <button class="px-4 py-2 text-gray-dark border border-gray-light rounded-lg hover:border-primary hover:text-primary transition-colors">重新认定</button>
+                                        <button class="px-4 py-2 text-gray-dark border border-gray-light rounded-lg hover:border-primary hover:text-primary transition-colors">高企培育</button>
+                                    </div>
+                                </div>
+
+                                <!-- 操作按钮 -->
+                                <div class="flex items-center gap-3">
+                                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                        <i class="fa fa-shopping-cart mr-2"></i>立即购买
+                                    </button>
+                                    <button class="px-6 py-2 text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                                        <i class="fa fa-commenting-o mr-2"></i>咨询客服
+                                    </button>
+                                    <button class="px-4 py-2 text-gray-dark border border-gray-light rounded-lg hover:border-primary hover:text-primary transition-colors">
+                                        <i class="fa fa-heart-o"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 服务详情标签页 -->
+                    <div class="border border-gray-light rounded-xl overflow-hidden">
+                        <!-- 标签导航 -->
+                        <div class="flex border-b border-gray-light">
+                            <button class="flex-1 py-4 text-center font-medium tab-active" onclick="switchTab('detail')">服务详情</button>
+                            <button class="flex-1 py-4 text-center font-medium text-gray-medium hover:text-primary transition-colors" onclick="switchTab('process')">服务流程</button>
+                            <button class="flex-1 py-4 text-center font-medium text-gray-medium hover:text-primary transition-colors" onclick="switchTab('reviews')">用户评价 (2,456)</button>
+                            <button class="flex-1 py-4 text-center font-medium text-gray-medium hover:text-primary transition-colors" onclick="switchTab('faq')">常见问题</button>
+                        </div>
+
+                        <!-- 标签内容 -->
+                        <div class="p-6">
+                            <!-- 服务详情 -->
+                            <div id="tab-detail" class="tab-content">
+                                <h3 class="text-xl font-bold mb-4">服务介绍</h3>
+                                <div class="prose max-w-none text-gray-dark">
+                                    <p class="mb-4">高新技术企业认定是国家为扶持和鼓励高新技术企业发展而设立的专项资质认定。通过认定的企业可享受15%的企业所得税优惠税率，以及各级政府的资金奖励和政策扶持。</p>
+                                    
+                                    <h4 class="font-semibold mb-3">服务内容</h4>
+                                    <ul class="space-y-2 mb-6">
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>企业资质评估与诊断分析</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>知识产权规划与申请指导</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>研发项目立项与费用归集</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>科技成果转化材料整理</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>申报材料编制与审核</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                            <span>全程跟踪与答辩辅导</span>
+                                        </li>
+                                    </ul>
+
+                                    <h4 class="font-semibold mb-3">服务优势</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                        <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                            <i class="fa fa-users text-3xl text-primary mb-2"></i>
+                                            <h5 class="font-medium text-dark">专业团队</h5>
+                                            <p class="text-sm text-gray-medium">10年以上经验专家</p>
+                                        </div>
+                                        <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                            <i class="fa fa-line-chart text-3xl text-primary mb-2"></i>
+                                            <h5 class="font-medium text-dark">高通过率</h5>
+                                            <p class="text-sm text-gray-medium">95%以上认定成功率</p>
+                                        </div>
+                                        <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                            <i class="fa fa-headphones text-3xl text-primary mb-2"></i>
+                                            <h5 class="font-medium text-dark">全程服务</h5>
+                                            <p class="text-sm text-gray-medium">一对一专属顾问</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 服务流程 -->
+                            <div id="tab-process" class="tab-content hidden">
+                                <h3 class="text-xl font-bold mb-6">服务流程</h3>
+                                <div class="relative">
+                                    <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-light"></div>
+                                    <div class="space-y-8">
+                                        <div class="flex items-start relative">
+                                            <div class="w-12 h-12 feature-icon rounded-full flex items-center justify-center text-white font-bold z-10">1</div>
+                                            <div class="ml-6 flex-1">
+                                                <h4 class="font-semibold text-dark">需求沟通</h4>
+                                                <p class="text-sm text-gray-medium mt-1">了解企业基本情况，评估认定可行性，制定申报方案</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start relative">
+                                            <div class="w-12 h-12 feature-icon rounded-full flex items-center justify-center text-white font-bold z-10">2</div>
+                                            <div class="ml-6 flex-1">
+                                                <h4 class="font-semibold text-dark">签订合同</h4>
+                                                <p class="text-sm text-gray-medium mt-1">明确服务内容、费用及双方权利义务</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start relative">
+                                            <div class="w-12 h-12 feature-icon rounded-full flex items-center justify-center text-white font-bold z-10">3</div>
+                                            <div class="ml-6 flex-1">
+                                                <h4 class="font-semibold text-dark">材料准备</h4>
+                                                <p class="text-sm text-gray-medium mt-1">收集整理企业资质、知识产权、财务等申报材料</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start relative">
+                                            <div class="w-12 h-12 feature-icon rounded-full flex items-center justify-center text-white font-bold z-10">4</div>
+                                            <div class="ml-6 flex-1">
+                                                <h4 class="font-semibold text-dark">网上申报</h4>
+                                                <p class="text-sm text-gray-medium mt-1">在高新技术企业认定管理系统提交申报材料</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start relative">
+                                            <div class="w-12 h-12 feature-icon rounded-full flex items-center justify-center text-white font-bold z-10">5</div>
+                                            <div class="ml-6 flex-1">
+                                                <h4 class="font-semibold text-dark">专家评审</h4>
+                                                <p class="text-sm text-gray-medium mt-1">配合专家评审，提供补充材料，进行答辩准备</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start relative">
+                                            <div class="w-12 h-12 feature-icon rounded-full flex items-center justify-center text-white font-bold z-10">6</div>
+                                            <div class="ml-6 flex-1">
+                                                <h4 class="font-semibold text-dark">公示领证</h4>
+                                                <p class="text-sm text-gray-medium mt-1">通过认定后领取高新技术企业证书</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 用户评价 -->
+                            <div id="tab-reviews" class="tab-content hidden">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="text-xl font-bold">用户评价</h3>
+                                    <div class="flex gap-2">
+                                        <button class="px-3 py-1 text-sm bg-primary text-white rounded">全部</button>
+                                        <button class="px-3 py-1 text-sm border border-gray-light text-gray-dark rounded hover:border-primary">好评 (2,234)</button>
+                                        <button class="px-3 py-1 text-sm border border-gray-light text-gray-dark rounded hover:border-primary">中评 (156)</button>
+                                        <button class="px-3 py-1 text-sm border border-gray-light text-gray-dark rounded hover:border-primary">差评 (66)</button>
+                                    </div>
+                                </div>
+
+                                <!-- 评价列表 -->
+                                <div class="space-y-4">
+                                    <div class="pl-4 py-3 border-l-3 border-primary">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-user text-gray-medium"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-dark">张经理</p>
+                                                    <p class="text-xs text-gray-medium">某科技公司</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-sm text-gray-medium">2024-01-15</span>
+                                        </div>
+                                        <div class="flex text-yellow-400 text-sm mb-2">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <p class="text-sm text-gray-dark">服务非常专业，从评估到申报全程跟进，最终顺利通过认定。特别感谢李顾问的耐心指导！</p>
+                                    </div>
+
+                                    <div class="pl-4 py-3 border-l-3 border-primary">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-user text-gray-medium"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-dark">王总</p>
+                                                    <p class="text-xs text-gray-medium">某制造企业</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-sm text-gray-medium">2024-01-10</span>
+                                        </div>
+                                        <div class="flex text-yellow-400 text-sm mb-2">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <p class="text-sm text-gray-dark">第二次合作了，上次是首次认定，这次是重新认定，依然很满意。专业、高效、省心！</p>
+                                    </div>
+
+                                    <div class="pl-4 py-3 border-l-3 border-primary">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                                    <i class="fa fa-user text-gray-medium"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-dark">李经理</p>
+                                                    <p class="text-xs text-gray-medium">某软件公司</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-sm text-gray-medium">2024-01-08</span>
+                                        </div>
+                                        <div class="flex text-yellow-400 text-sm mb-2">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <p class="text-sm text-gray-dark">整体服务不错，材料准备很充分，就是中间沟通响应速度可以再快一些。</p>
+                                    </div>
+                                </div>
+
+                                <!-- 分页 -->
+                                <div class="flex justify-center mt-6">
+                                    <div class="flex gap-2">
+                                        <button class="px-3 py-1 border border-gray-light rounded hover:border-primary"><i class="fa fa-chevron-left"></i></button>
+                                        <button class="px-3 py-1 bg-primary text-white rounded">1</button>
+                                        <button class="px-3 py-1 border border-gray-light rounded hover:border-primary">2</button>
+                                        <button class="px-3 py-1 border border-gray-light rounded hover:border-primary">3</button>
+                                        <span class="px-2 py-1">...</span>
+                                        <button class="px-3 py-1 border border-gray-light rounded hover:border-primary">10</button>
+                                        <button class="px-3 py-1 border border-gray-light rounded hover:border-primary"><i class="fa fa-chevron-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 常见问题 -->
+                            <div id="tab-faq" class="tab-content hidden">
+                                <h3 class="text-xl font-bold mb-6">常见问题</h3>
+                                <div class="space-y-4">
+                                    <div class="border border-gray-light rounded-lg p-4">
+                                        <h4 class="font-medium text-dark mb-2 flex items-center">
+                                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs mr-2">Q</span>
+                                            高新技术企业认定的基本条件是什么？
+                                        </h4>
+                                        <p class="text-sm text-gray-medium pl-8">企业申请认定时须注册成立一年以上；拥有核心知识产权；技术属于《国家重点支持的高新技术领域》规定的范围；科技人员占比不低于10%；近三个会计年度的研发费用总额占同期销售收入总额的比例符合要求等。</p>
+                                    </div>
+                                    <div class="border border-gray-light rounded-lg p-4">
+                                        <h4 class="font-medium text-dark mb-2 flex items-center">
+                                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs mr-2">Q</span>
+                                            认定成功后有哪些优惠政策？
+                                        </h4>
+                                        <p class="text-sm text-gray-medium pl-8">经认定的高新技术企业，减按15%的税率征收企业所得税；可享受各级政府的资金奖励；在政府采购、招投标等方面享有优先权；有利于提升企业形象和品牌价值。</p>
+                                    </div>
+                                    <div class="border border-gray-light rounded-lg p-4">
+                                        <h4 class="font-medium text-dark mb-2 flex items-center">
+                                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs mr-2">Q</span>
+                                            服务周期是多长？
+                                        </h4>
+                                        <p class="text-sm text-gray-medium pl-8">一般情况下，从材料准备到最终认定需要3-6个月。具体时间取决于企业现有条件、材料准备进度以及当年的申报批次安排。</p>
+                                    </div>
+                                    <div class="border border-gray-light rounded-lg p-4">
+                                        <h4 class="font-medium text-dark mb-2 flex items-center">
+                                            <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs mr-2">Q</span>
+                                            认定不成功可以退款吗？
+                                        </h4>
+                                        <p class="text-sm text-gray-medium pl-8">我们承诺"不通过退全款"。如因我方原因导致认定未通过，将全额退还服务费用。但因企业自身原因（如提供虚假材料、不配合工作等）导致的失败不在退款范围内。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="space-y-6">
+                    <!-- 服务机构信息 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fa fa-building text-2xl text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-dark">科创服务中心</h3>
+                                <div class="flex items-center gap-1 text-sm">
+                                    <span class="text-yellow-400"><i class="fa fa-star"></i> 4.9</span>
+                                    <span class="text-gray-medium">| 已服务 5000+ 企业</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-medium mb-4">
+                            <p><i class="fa fa-check-circle text-green-500 mr-2"></i>官方认证服务机构</p>
+                            <p><i class="fa fa-check-circle text-green-500 mr-2"></i>10年行业经验</p>
+                            <p><i class="fa fa-check-circle text-green-500 mr-2"></i>专业顾问团队</p>
+                        </div>
+                        <button class="w-full py-2 text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                            进入店铺
+                        </button>
+                    </div>
+
+                    <!-- 相关服务推荐 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <h3 class="font-bold text-dark mb-4">相关服务推荐</h3>
+                        <div class="space-y-4">
+                            <a href="#" class="flex gap-3 group">
+                                <div class="w-20 h-20 bg-gradient-to-br from-green-50 to-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-leaf text-2xl text-green-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-dark text-sm group-hover:text-primary transition-colors">专精特新企业认定</h4>
+                                    <p class="text-xs text-gray-medium mt-1">助力企业成为专精特新"小巨人"</p>
+                                    <p class="text-danger font-bold mt-1">¥12,800</p>
+                                </div>
+                            </a>
+                            <a href="#" class="flex gap-3 group">
+                                <div class="w-20 h-20 bg-gradient-to-br from-purple-50 to-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-lightbulb-o text-2xl text-purple-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-dark text-sm group-hover:text-primary transition-colors">发明专利申请</h4>
+                                    <p class="text-xs text-gray-medium mt-1">专业代理，快速授权</p>
+                                    <p class="text-danger font-bold mt-1">¥4,500</p>
+                                </div>
+                            </a>
+                            <a href="#" class="flex gap-3 group">
+                                <div class="w-20 h-20 bg-gradient-to-br from-orange-50 to-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-certificate text-2xl text-orange-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-dark text-sm group-hover:text-primary transition-colors">ISO9001认证</h4>
+                                    <p class="text-xs text-gray-medium mt-1">质量管理体系认证</p>
+                                    <p class="text-danger font-bold mt-1">¥8,800</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 服务保障 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <h3 class="font-bold text-dark mb-4">服务保障</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-shield text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-dark text-sm">平台担保</h4>
+                                    <p class="text-xs text-gray-medium">服务全程平台监管，资金安全有保障</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-refresh text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-dark text-sm">不满意退款</h4>
+                                    <p class="text-xs text-gray-medium">服务不满意可申请退款</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-headphones text-purple-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-dark text-sm">专属客服</h4>
+                                    <p class="text-xs text-gray-medium">7×12小时在线客服支持</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-6 mb-4">
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">服务条款</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">隐私政策</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">联系我们</a>
+                </div>
+                <p class="text-xs text-gray-medium">
+                    © 2026 科派 - 湖北科创大数据平台 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 标签切换功能
+        function switchTab(tabName) {
+            // 隐藏所有标签内容
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // 显示选中的标签内容
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            
+            // 更新标签按钮样式
+            document.querySelectorAll('.tab-active').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('text-gray-medium');
+            });
+            
+            event.target.classList.add('tab-active');
+            event.target.classList.remove('text-gray-medium');
+        }
+
+        // 多级菜单切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-left-item');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // 移除所有active类
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+                    
+                    // 添加active类到当前项
+                    this.classList.add('active');
+                    document.getElementById('menu-' + category).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

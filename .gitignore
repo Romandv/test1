@@ -1,0 +1,12 @@
+# 依赖文件夹
+node_modules/
+# 打包文件夹
+dist/
+build/
+# 环境变量
+.env
+.env.local
+# IDE 配置
+.vscode/
+.idea/
+.DS_Store

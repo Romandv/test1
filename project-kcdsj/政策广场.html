@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政策广场 - 科派派</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .sidebar-item {
+                transition: all 0.2s ease;
+            }
+            .sidebar-item:hover {
+                background: rgba(22, 93, 255, 0.1);
+            }
+            .sidebar-item.active {
+                background: rgba(22, 93, 255, 0.1);
+                border-left: 3px solid #165DFF;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            }
+            .btn-primary {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #0F4ED9 0%, #0DB8A6 100%);
+            }
+            .input-focus {
+                transition: all 0.3s ease;
+            }
+            .input-focus:focus {
+                border-color: #165DFF;
+                box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+            }
+            .policy-tag {
+                transition: all 0.2s ease;
+            }
+            .policy-tag:hover {
+                background: rgba(22, 93, 255, 0.15);
+                color: #165DFF;
+            }
+            .policy-tag.active {
+                background: #165DFF;
+                color: white;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-xl">科</span>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-primary">科派派</h1>
+                            <p class="text-xs text-gray-medium">湖北科创大数据平台</p>
+                        </div>
+                    </div>
+
+                    <!-- 导航菜单 -->
+                    <nav class="hidden md:flex items-center space-x-6 ml-10">
+                        <a href="科创大数据平台智能体矩阵.html"
+                            class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                        <a href="政策广场.html"
+                            class="font-medium text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors">政策广场</a>
+                        <a href="科创服务商城详情页.html"
+                            class="font-medium text-gray-dark hover:text-primary transition-colors">服务商城</a>
+                        <div class="relative group">
+                            <a href="标准服务产品.html"
+                                class="font-medium text-gray-dark hover:text-primary transition-colors flex items-center gap-1">
+                                标准服务产品
+                                <i class="fa fa-angle-down text-xs transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            <!-- 下拉菜单 -->
+                            <div
+                                class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <div class="py-1">
+                                    <a href="标准服务产品.html#growth-package"
+                                        class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors"
+                                        onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">企业成长陪跑包</a>
+                                    <a href="标准服务产品.html#quality-plan"
+                                        class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors"
+                                        onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">提质计划包</a>
+                                    <a href="标准服务产品.html#ipo-package"
+                                        class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors"
+                                        onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">上市包</a>
+                                    <a href="标准服务产品.html#special-package"
+                                        class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors"
+                                        onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">专项解决包</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="index.html"class="font-medium text-gray-dark hover:text-primary transition-colors">科创大数据</a>
+                    </nav>
+                </div>
+
+                <!-- 右侧登录注册 -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-dark hover:text-primary transition-colors">登录</a>
+                    <a href="#"
+                        class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">注册</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="flex gap-6">
+            <!-- 左侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-sm p-4 h-full">
+                    <!-- 政策广场标题 -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-bold text-lg">政策广场</h2>
+                        <button class="text-xs text-primary hover:underline">更多</button>
+                    </div>
+
+                    <!-- 新对话 -->
+                    <div class="mb-4">
+                        <button
+                            class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus"></i>
+                            <span>智能咨询</span>
+                        </button>
+                    </div>
+
+                    <!-- 最近咨询 -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">最近咨询</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-item active p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm">高企申报政策咨询</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-gray-medium rounded-full"></div>
+                                <span class="text-sm">专精特新补贴</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-gray-medium rounded-full"></div>
+                                <span class="text-sm">研发费用加计扣除</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 政策分类 -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">政策分类</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-item active p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-file-text text-primary"></i>
+                                <span class="text-sm">全部政策</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-money text-primary"></i>
+                                <span class="text-sm">资金补贴</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-rocket text-primary"></i>
+                                <span class="text-sm">项目申报</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-industry text-primary"></i>
+                                <span class="text-sm">资质认定</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-line-chart text-primary"></i>
+                                <span class="text-sm">税收优惠</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 底部用户信息 -->
+                    <div class="mt-6 pt-4 border-t border-gray-light">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <i class="fa fa-user text-gray-medium"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">用户名称</p>
+                                <p class="text-xs text-gray-medium">普通用户</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中间主内容 -->
+            <div class="flex-1">
+                <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                    <!-- 政策广场标题 -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fa fa-file-text text-primary text-xl"></i>
+                            <h2 class="font-bold text-lg">政策广场</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-gray-medium">汇集全网政策，智能匹配企业需求</span>
+                        </div>
+                    </div>
+
+                    <!-- 搜索和筛选 -->
+                    <div class="mb-6">
+                        <!-- 搜索框 -->
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="flex-1 relative">
+                                <input type="text" placeholder="搜索政策名称、政策文号、关键词..."
+                                    class="w-full px-4 py-3 border border-gray-light rounded-lg input-focus pl-10"
+                                    id="policySearch">
+                                <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-medium"></i>
+                            </div>
+                            <button
+                                class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                                <i class="fa fa-search mr-2"></i>搜索
+                            </button>
+                        </div>
+
+                        <!-- 筛选条件 -->
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="text-sm text-gray-medium">政策类型：</span>
+                            <button
+                                class="policy-tag active px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">全部</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">资金补贴</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">项目申报</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">资质认定</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">税收优惠</button>
+
+                            <span class="text-sm text-gray-medium ml-4">申报状态：</span>
+                            <button
+                                class="policy-tag active px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">全部</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">申报中</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">即将开始</button>
+                            <button
+                                class="policy-tag px-3 py-1 text-sm bg-gray-light text-gray-dark rounded-full">已结束</button>
+                        </div>
+                    </div>
+
+                    <!-- 政策列表 -->
+                    <div class="space-y-4">
+                        <!-- 政策卡片1 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-xs bg-green-100 text-success rounded">申报中</span>
+                                        <span class="px-2 py-0.5 text-xs bg-blue-100 text-primary rounded">资金补贴</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-2 hover:text-primary cursor-pointer">
+                                        关于开展2026年度湖北省高新技术企业认定工作的通知</h3>
+                                    <p class="text-sm text-gray-medium mb-3">
+                                        为深入实施创新驱动发展战略，推动湖北省高新技术企业高质量发展，现组织开展2026年度高新技术企业认定工作...</p>
+                                </div>
+                                <div class="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center ml-4">
+                                    <i class="fa fa-file-text-o text-3xl text-gray-medium"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-light">
+                                <div class="flex items-center gap-4 text-xs text-gray-medium">
+                                    <span><i class="fa fa-calendar mr-1"></i>发布于：2026-01-15</span>
+                                    <span><i class="fa fa-eye mr-1"></i>浏览：1,256</span>
+                                    <span><i class="fa fa-clock-o mr-1"></i>截止：2026-03-31</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">查看详情</button>
+                                    <button
+                                        class="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即申报</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 政策卡片2 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-xs bg-orange-100 text-warning rounded">即将开始</span>
+                                        <span
+                                            class="px-2 py-0.5 text-xs bg-purple-100 text-purple-600 rounded">项目申报</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-2 hover:text-primary cursor-pointer">
+                                        关于组织申报2026年湖北省专精特新"小巨人"企业的通知</h3>
+                                    <p class="text-sm text-gray-medium mb-3">
+                                        为引导湖北省中小企业走专精特新发展道路，培育一批专注于细分市场、创新能力强、市场占有率高...</p>
+                                </div>
+                                <div class="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center ml-4">
+                                    <i class="fa fa-trophy text-3xl text-gray-medium"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-light">
+                                <div class="flex items-center gap-4 text-xs text-gray-medium">
+                                    <span><i class="fa fa-calendar mr-1"></i>发布于：2026-01-20</span>
+                                    <span><i class="fa fa-eye mr-1"></i>浏览：892</span>
+                                    <span><i class="fa fa-clock-o mr-1"></i>开始：2026-02-15</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">查看详情</button>
+                                    <button
+                                        class="px-4 py-2 text-sm bg-gray-light text-gray-dark rounded-lg cursor-not-allowed opacity-50">即将开始</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 政策卡片3 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span
+                                            class="px-2 py-0.5 text-xs bg-gray-100 text-gray-medium rounded">已结束</span>
+                                        <span class="px-2 py-0.5 text-xs bg-red-100 text-danger rounded">税收优惠</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-2 hover:text-primary cursor-pointer">
+                                        关于2025年度研发费用加计扣除政策申报的通知</h3>
+                                    <p class="text-sm text-gray-medium mb-3">
+                                        根据国家税务总局关于研发费用加计扣除税收优惠政策相关规定，现组织开展2025年度研发费用加计扣除申报工作...</p>
+                                </div>
+                                <div class="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center ml-4">
+                                    <i class="fa fa-calculator text-3xl text-gray-medium"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-light">
+                                <div class="flex items-center gap-4 text-xs text-gray-medium">
+                                    <span><i class="fa fa-calendar mr-1"></i>发布于：2025-12-01</span>
+                                    <span><i class="fa fa-eye mr-1"></i>浏览：2,156</span>
+                                    <span><i class="fa fa-clock-o mr-1"></i>截止：2025-12-31</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">查看详情</button>
+                                    <button
+                                        class="px-4 py-2 text-sm bg-gray-light text-gray-dark rounded-lg cursor-not-allowed opacity-50">已结束</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 政策卡片4 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-xs bg-green-100 text-success rounded">申报中</span>
+                                        <span class="px-2 py-0.5 text-xs bg-teal-100 text-teal-600 rounded">资质认定</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-2 hover:text-primary cursor-pointer">
+                                        关于开展2026年度湖北省科技型中小企业评价工作的通知</h3>
+                                    <p class="text-sm text-gray-medium mb-3">
+                                        为推动湖北省科技型中小企业创新发展，现组织开展2026年度科技型中小企业评价工作，符合条件的企业可享受...</p>
+                                </div>
+                                <div class="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center ml-4">
+                                    <i class="fa fa-graduation-cap text-3xl text-gray-medium"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-light">
+                                <div class="flex items-center gap-4 text-xs text-gray-medium">
+                                    <span><i class="fa fa-calendar mr-1"></i>发布于：2026-01-10</span>
+                                    <span><i class="fa fa-eye mr-1"></i>浏览：1,543</span>
+                                    <span><i class="fa fa-clock-o mr-1"></i>截止：2026-10-31</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">查看详情</button>
+                                    <button
+                                        class="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即申报</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 政策卡片5 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-xs bg-green-100 text-success rounded">申报中</span>
+                                        <span
+                                            class="px-2 py-0.5 text-xs bg-yellow-100 text-yellow-600 rounded">资金补贴</span>
+                                    </div>
+                                    <h3 class="font-bold text-lg mb-2 hover:text-primary cursor-pointer">
+                                        湖北省中小企业数字化转型专项资金申报指南</h3>
+                                    <p class="text-sm text-gray-medium mb-3">
+                                        为加快推进湖北省中小企业数字化转型，提升企业核心竞争力，现设立中小企业数字化转型专项资金，支持...</p>
+                                </div>
+                                <div class="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center ml-4">
+                                    <i class="fa fa-laptop text-3xl text-gray-medium"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-light">
+                                <div class="flex items-center gap-4 text-xs text-gray-medium">
+                                    <span><i class="fa fa-calendar mr-1"></i>发布于：2026-01-25</span>
+                                    <span><i class="fa fa-eye mr-1"></i>浏览：756</span>
+                                    <span><i class="fa fa-clock-o mr-1"></i>截止：2026-04-30</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">查看详情</button>
+                                    <button
+                                        class="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即申报</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分页 -->
+                    <div class="mt-8 flex items-center justify-center">
+                        <div class="flex items-center gap-2">
+                            <button class="px-3 py-1 text-sm text-gray-medium hover:text-primary transition-colors">
+                                <i class="fa fa-chevron-left"></i>
+                            </button>
+                            <button class="px-3 py-1 text-sm bg-primary text-white rounded">1</button>
+                            <button
+                                class="px-3 py-1 text-sm text-gray-medium hover:text-primary transition-colors">2</button>
+                            <button
+                                class="px-3 py-1 text-sm text-gray-medium hover:text-primary transition-colors">3</button>
+                            <button
+                                class="px-3 py-1 text-sm text-gray-medium hover:text-primary transition-colors">4</button>
+                            <button
+                                class="px-3 py-1 text-sm text-gray-medium hover:text-primary transition-colors">5</button>
+                            <button class="px-3 py-1 text-sm text-gray-medium hover:text-primary transition-colors">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="space-y-6">
+                    <!-- 热门政策 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold"><i class="fa fa-fire text-warning mr-2"></i>热门政策</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1 hover:text-primary cursor-pointer">2026年高企认定工作启动</p>
+                                <p class="text-xs text-gray-medium">申报截止：2026-03-31</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1 hover:text-primary cursor-pointer">专精特新小巨人申报</p>
+                                <p class="text-xs text-gray-medium">申报截止：2026-04-15</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1 hover:text-primary cursor-pointer">研发费用加计扣除</p>
+                                <p class="text-xs text-gray-medium">申报截止：2026-05-31</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1 hover:text-primary cursor-pointer">科技型中小企业评价</p>
+                                <p class="text-xs text-gray-medium">申报截止：2026-10-31</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 政策解读 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold"><i class="fa fa-file-text text-primary mr-2"></i>政策解读</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">高企认定最新政策变化解读</p>
+                                <p class="text-xs text-gray-medium">一文读懂2026年高企认定要点</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">专精特新企业认定标准</p>
+                                <p class="text-xs text-gray-medium">企业申报要点全解析</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 推荐服务 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold"><i class="fa fa-star text-warning mr-2"></i>推荐服务</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class="fa fa-file-text text-primary"></i>
+                                    <p class="text-sm font-medium">高企申报代理</p>
+                                </div>
+                                <p class="text-xs text-gray-medium mb-2">专业团队全程代办</p>
+                                <button class="text-xs text-primary hover:underline">立即咨询</button>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class="fa fa-trophy text-primary"></i>
+                                    <p class="text-sm font-medium">专精特新辅导</p>
+                                </div>
+                                <p class="text-xs text-gray-medium mb-2">提高认定通过率</p>
+                                <button class="text-xs text-primary hover:underline">立即咨询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-6 mb-4">
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">服务条款</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">隐私政策</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">联系我们</a>
+                </div>
+                <p class="text-xs text-gray-medium">
+                    © 2026 科派 - 湖北科创大数据平台 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 政策标签点击事件
+        document.querySelectorAll('.policy-tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                // 找到同组的标签并移除active状态
+                const siblings = this.parentElement.querySelectorAll('.policy-tag');
+                siblings.forEach(s => s.classList.remove('active'));
+                // 添加当前标签的active状态
+                this.classList.add('active');
+
+                // 获取筛选条件
+                const policyType = document.querySelectorAll('.policy-tag')[0].parentElement.querySelectorAll('.policy-tag');
+                console.log('筛选政策类型:', this.textContent.trim());
+            });
+        });
+
+        // 侧边栏项点击事件
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 搜索功能
+        const searchBtn = document.querySelector('button:has(i.fa-search)');
+        const searchInput = document.getElementById('policySearch');
+
+        function performSearch() {
+            const keyword = searchInput.value.trim();
+            if (keyword) {
+                console.log('搜索关键词:', keyword);
+            }
+        }
+
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // 政策卡片点击事件
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('click', function (e) {
+                // 排除按钮点击
+                if (e.target.tagName === 'BUTTON') return;
+
+                const title = this.querySelector('h3');
+                if (title) {
+                    console.log('查看政策:', title.textContent);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

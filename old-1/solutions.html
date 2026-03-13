@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决方案 - 湖北科创大数据平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px -10px rgba(22, 93, 255, 0.15);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-xl">科</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-primary">湖北科创大数据平台</h1>
+                        <p class="text-xs text-gray-medium">Innovation Data Platform</p>
+                    </div>
+                </div>
+                
+                <!-- 导航菜单 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                    <a href="platform-capabilities.html" class="font-medium text-gray-dark hover:text-primary transition-colors">平台能力</a>
+                    <a href="solutions.html" class="font-medium text-primary border-b-2 border-primary pb-1">解决方案</a>
+                    <a href="about.html" class="font-medium text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                </nav>
+                
+                <!-- 右侧操作区 -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="科创大数据平台智能体矩阵.html" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                        <i class="fa fa-robot mr-2"></i>智能体入口
+                    </a>
+                    <a href="标准服务产品.html" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        <i class="fa fa-shopping-bag mr-2"></i>科派派
+                    </a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button class="md:hidden text-gray-dark focus:outline-none" id="mobileMenuButton">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端导航菜单 -->
+            <div class="md:hidden hidden" id="mobileMenu">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                    <a href="platform-capabilities.html" class="font-medium text-gray-dark hover:text-primary transition-colors">平台能力</a>
+                    <a href="solutions.html" class="font-medium text-primary border-b-2 border-primary pb-1">解决方案</a>
+                    <a href="about.html" class="font-medium text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <div class="flex flex-col space-y-3 pt-3">
+                        <a href="科创大数据平台智能体矩阵.html" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
+                            <i class="fa fa-robot mr-2"></i>智能体入口
+                        </a>
+                        <a href="标准服务产品.html" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                            <i class="fa fa-shopping-bag mr-2"></i>科派派
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单交互
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- 页面标题 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">解决方案</h1>
+                <p class="text-gray-medium">
+                    湖北科创大数据平台为不同场景提供定制化的解决方案，满足各类用户的需求
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 政府场景解决方案 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-16">
+                <div class="md:w-1/2">
+                    <div class="card-hover bg-white rounded-xl p-6 shadow-sm h-full">
+                        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-building text-primary text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">政府场景</h3>
+                        <p class="text-gray-medium mb-4">
+                            为政府部门提供科技政策制定、产业分析、企业培育等决策支持
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">政策制定辅助</span>
+                                <span class="text-sm text-primary">99%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 99%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">产业发展分析</span>
+                                <span class="text-sm text-primary">98%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 98%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">企业培育支持</span>
+                                <span class="text-sm text-primary">97%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 97%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-2xl font-bold mb-4">政府场景解决方案</h2>
+                    <p class="text-gray-medium mb-6">
+                        平台为政府部门提供全方位的科技决策支持，帮助政府制定科学的科技政策，促进区域科技发展
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-file-text-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">政策制定辅助</h3>
+                                <p class="text-sm text-gray-medium">基于大数据分析，为政府提供政策制定的科学依据，提高政策的针对性和有效性</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-line-chart text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">产业发展分析</h3>
+                                <p class="text-sm text-gray-medium">分析区域产业发展现状和趋势，为政府提供产业规划和发展建议</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-lightbulb-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">企业培育支持</h3>
+                                <p class="text-sm text-gray-medium">识别和培育高潜力科技企业，为政府提供企业培育计划的制定依据</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-users text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">人才政策制定</h3>
+                                <p class="text-sm text-gray-medium">基于人才数据分析，为政府提供人才政策制定的科学依据</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 高校场景解决方案 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row-reverse items-center gap-8 mb-16">
+                <div class="md:w-1/2">
+                    <h2 class="text-2xl font-bold mb-4">高校场景解决方案</h2>
+                    <p class="text-gray-medium mb-6">
+                        平台为高校提供科研成果转化、人才培养、产学研合作等全方位服务，促进高校科技成果的产业化
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-lightbulb-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">科研成果转化</h3>
+                                <p class="text-sm text-gray-medium">帮助高校将科研成果转化为实际应用，提高科研成果的产业化率</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-graduation-cap text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">人才培养支持</h3>
+                                <p class="text-sm text-gray-medium">为高校提供人才培养方案的制定依据，提高人才培养质量</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-handshake-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">产学研合作</h3>
+                                <p class="text-sm text-gray-medium">促进高校与企业、科研机构的合作，形成产学研一体化的创新体系</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-book text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">学科发展规划</h3>
+                                <p class="text-sm text-gray-medium">基于学科数据分析，为高校提供学科发展规划的科学依据</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="card-hover bg-white rounded-xl p-6 shadow-sm h-full">
+                        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-graduation-cap text-primary text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">高校场景</h3>
+                        <p class="text-gray-medium mb-4">
+                            为高校提供科研成果转化、人才培养、产学研合作等服务
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">科研成果转化</span>
+                                <span class="text-sm text-primary">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">人才培养支持</span>
+                                <span class="text-sm text-primary">96%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 96%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">产学研合作</span>
+                                <span class="text-sm text-primary">94%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 金融机构场景解决方案 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-16">
+                <div class="md:w-1/2">
+                    <div class="card-hover bg-white rounded-xl p-6 shadow-sm h-full">
+                        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-bank text-primary text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">金融机构场景</h3>
+                        <p class="text-gray-medium mb-4">
+                            为金融机构提供企业信用评估、科技项目融资、风险控制等服务
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">企业信用评估</span>
+                                <span class="text-sm text-primary">98%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 98%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">科技项目融资</span>
+                                <span class="text-sm text-primary">97%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 97%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">风险控制</span>
+                                <span class="text-sm text-primary">99%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 99%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-2xl font-bold mb-4">金融机构场景解决方案</h2>
+                    <p class="text-gray-medium mb-6">
+                        平台为金融机构提供全方位的科技金融服务，帮助金融机构识别优质科技企业和项目，降低金融风险
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-credit-card text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">企业信用评估</h3>
+                                <p class="text-sm text-gray-medium">基于企业多维度数据，为金融机构提供企业信用评估服务，降低信贷风险</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-money text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">科技项目融资</h3>
+                                <p class="text-sm text-gray-medium">为金融机构提供科技项目的评估和融资建议，支持科技企业的发展</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-shield text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">风险控制</h3>
+                                <p class="text-sm text-gray-medium">为金融机构提供风险控制工具，帮助金融机构识别和管理风险</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-line-chart text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">投资决策支持</h3>
+                                <p class="text-sm text-gray-medium">为金融机构提供投资决策支持，帮助金融机构选择优质的科技项目和企业</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 科技企业场景解决方案 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row-reverse items-center gap-8 mb-16">
+                <div class="md:w-1/2">
+                    <h2 class="text-2xl font-bold mb-4">科技企业场景解决方案</h2>
+                    <p class="text-gray-medium mb-6">
+                        平台为科技企业提供政策申报、知识产权保护、市场分析等全方位服务，帮助企业快速发展
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-file-text-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">政策申报指导</h3>
+                                <p class="text-sm text-gray-medium">为企业提供政策申报指导，帮助企业获取政策支持和资金补贴</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-copyright text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">知识产权保护</h3>
+                                <p class="text-sm text-gray-medium">为企业提供知识产权申请、保护和管理服务，保护企业的创新成果</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-line-chart text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">市场分析</h3>
+                                <p class="text-sm text-gray-medium">为企业提供市场分析服务，帮助企业了解市场需求和竞争态势</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-lightbulb-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">科技项目规划</h3>
+                                <p class="text-sm text-gray-medium">为企业提供科技项目规划服务，帮助企业制定科学的研发和创新计划</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="card-hover bg-white rounded-xl p-6 shadow-sm h-full">
+                        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-lightbulb-o text-primary text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">科技企业场景</h3>
+                        <p class="text-gray-medium mb-4">
+                            为科技企业提供政策申报、知识产权保护、市场分析等全方位服务
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">政策申报指导</span>
+                                <span class="text-sm text-primary">98%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 98%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">知识产权保护</span>
+                                <span class="text-sm text-primary">97%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 97%"></div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">市场分析</span>
+                                <span class="text-sm text-primary">96%</span>
+                            </div>
+                            <div class="w-full bg-gray-light rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 96%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案价值 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4">解决方案价值</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">
+                    平台解决方案为不同用户群体创造显著价值
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 对政府的价值 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-building text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">对政府的价值</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">提高政策制定的科学性和有效性</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">促进区域科技产业发展</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">优化科技资源配置</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">提升政府服务效率</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 对高校的价值 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">对高校的价值</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">提高科研成果转化率</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">促进产学研合作</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">提升人才培养质量</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">增强学科竞争力</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 对企业的价值 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-lightbulb-o text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">对企业的价值</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">获取政策支持和资金补贴</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">保护知识产权</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">优化市场策略</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-success"></i>
+                            <span class="text-sm">提高创新能力和竞争力</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-6 mb-4">
+                    <a href="index.html" class="text-sm text-gray-dark hover:text-primary transition-colors">首页</a>
+                    <a href="platform-capabilities.html" class="text-sm text-gray-dark hover:text-primary transition-colors">平台能力</a>
+                    <a href="solutions.html" class="text-sm text-gray-dark hover:text-primary transition-colors">解决方案</a>
+                    <a href="about.html" class="text-sm text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="政策广场.html" class="text-sm text-gray-dark hover:text-primary transition-colors">政策广场</a>
+                    <a href="标准服务产品.html" class="text-sm text-gray-dark hover:text-primary transition-colors">科派派</a>
+                </div>
+                <p class="text-xs text-gray-medium">
+                    © 2026 湖北科创大数据平台 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 湖北科创大数据平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px -10px rgba(22, 93, 255, 0.15);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-xl">科</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-primary">湖北科创大数据平台</h1>
+                        <p class="text-xs text-gray-medium">Innovation Data Platform</p>
+                    </div>
+                </div>
+                
+                <!-- 导航菜单 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                    <a href="platform-capabilities.html" class="font-medium text-gray-dark hover:text-primary transition-colors">平台能力</a>
+                    <a href="solutions.html" class="font-medium text-gray-dark hover:text-primary transition-colors">解决方案</a>
+                    <a href="about.html" class="font-medium text-primary border-b-2 border-primary pb-1">关于我们</a>
+                </nav>
+                
+                <!-- 右侧操作区 -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="科创大数据平台智能体矩阵.html" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                        <i class="fa fa-robot mr-2"></i>智能体入口
+                    </a>
+                    <a href="标准服务产品.html" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        <i class="fa fa-shopping-bag mr-2"></i>科派派
+                    </a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button class="md:hidden text-gray-dark focus:outline-none" id="mobileMenuButton">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端导航菜单 -->
+            <div class="md:hidden hidden" id="mobileMenu">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                    <a href="platform-capabilities.html" class="font-medium text-gray-dark hover:text-primary transition-colors">平台能力</a>
+                    <a href="solutions.html" class="font-medium text-gray-dark hover:text-primary transition-colors">解决方案</a>
+                    <a href="about.html" class="font-medium text-primary border-b-2 border-primary pb-1">关于我们</a>
+                    <div class="flex flex-col space-y-3 pt-3">
+                        <a href="科创大数据平台智能体矩阵.html" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
+                            <i class="fa fa-robot mr-2"></i>智能体入口
+                        </a>
+                        <a href="标准服务产品.html" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                            <i class="fa fa-shopping-bag mr-2"></i>科派派
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单交互
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- 页面标题 -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">关于我们</h1>
+                <p class="text-gray-medium">
+                    湖北科创大数据平台致力于为企业提供全方位的科创服务，推动区域科技发展
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 平台介绍 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-16">
+                <div class="md:w-1/2">
+                    <div class="card-hover bg-white rounded-xl p-6 shadow-sm h-full">
+                        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-lightbulb-o text-primary text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">平台愿景</h3>
+                        <p class="text-gray-medium mb-4">
+                            成为湖北区域科创服务的核心载体，推动科技与经济的深度融合
+                        </p>
+                        <h3 class="text-xl font-bold mb-3">平台使命</h3>
+                        <p class="text-gray-medium">
+                            为企业提供全方位的科创服务，帮助企业快速发展，促进区域科技进步
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-2xl font-bold mb-4">平台介绍</h2>
+                    <p class="text-gray-medium mb-6">
+                        湖北科创大数据平台是由湖北省政府主导建设的综合性科创服务平台，旨在通过大数据、人工智能等技术手段，为企业提供全方位的科创服务，推动区域科技发展。
+                    </p>
+                    <p class="text-gray-medium mb-6">
+                        平台汇聚全球科技数据，包括200亿+全球科技文本数据、2.5亿+全球科技实体数据、2亿全球工商数据、50亿+科技实体语义数据和7000+全球产业数据，为企业提供全面、精准的科创信息支持。
+                    </p>
+                    <p class="text-gray-medium mb-6">
+                        平台采用先进的AI技术，实现智能政策匹配、项目规划和科创管理，为企业提供个性化的科创服务。同时，平台还提供政策服务、服务商城、标准服务产品等核心功能，满足企业的多样化需求。
+                    </p>
+                    <p class="text-gray-medium">
+                        未来，平台将继续加强技术创新和服务能力建设，为湖北区域的科技发展和经济增长做出更大贡献。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心优势 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4">核心优势</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">
+                    平台拥有强大的技术和数据能力，为用户提供优质的科创服务
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 数据优势 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">数据优势</h3>
+                    <p class="text-gray-medium">
+                        汇聚全球200亿+科技文本数据，2.5亿+科技实体数据，为决策提供数据支撑
+                    </p>
+                </div>
+                
+                <!-- 技术优势 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">技术优势</h3>
+                    <p class="text-gray-medium">
+                        基于AI技术，实现智能政策匹配、项目规划和科创管理，提升服务效率
+                    </p>
+                </div>
+                
+                <!-- 服务优势 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-14 h-14 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-headphones text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">服务优势</h3>
+                    <p class="text-gray-medium">
+                        提供全流程的科创服务，从政策咨询到项目申报，一站式解决企业需求
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队介绍 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4">团队介绍</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">
+                    平台拥有一支专业的团队，为用户提供优质的科创服务
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 团队成员1 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm text-center">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-user text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1">张教授</h3>
+                    <p class="text-sm text-primary mb-2">首席科学家</p>
+                    <p class="text-sm text-gray-medium">
+                        人工智能领域专家，拥有丰富的科研和项目管理经验
+                    </p>
+                </div>
+                
+                <!-- 团队成员2 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm text-center">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-user text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1">李博士</h3>
+                    <p class="text-sm text-primary mb-2">技术总监</p>
+                    <p class="text-sm text-gray-medium">
+                        大数据技术专家，负责平台技术架构设计和研发
+                    </p>
+                </div>
+                
+                <!-- 团队成员3 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm text-center">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-user text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1">王经理</h3>
+                    <p class="text-sm text-primary mb-2">运营总监</p>
+                    <p class="text-sm text-gray-medium">
+                        拥有丰富的科技服务运营经验，负责平台运营管理
+                    </p>
+                </div>
+                
+                <!-- 团队成员4 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm text-center">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-user text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-1">赵女士</h3>
+                    <p class="text-sm text-primary mb-2">市场总监</p>
+                    <p class="text-sm text-gray-medium">
+                        拥有丰富的市场营销经验，负责平台市场推广和品牌建设
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4">联系方式</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">
+                    如果您有任何问题或需求，请随时联系我们
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <h3 class="text-xl font-bold mb-4">联系信息</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-map-marker text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">地址</h4>
+                                <p class="text-sm text-gray-medium">湖北省武汉市东湖新技术开发区光谷大道70号</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-phone text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">电话</h4>
+                                <p class="text-sm text-gray-medium">027-12345678</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-envelope text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">邮箱</h4>
+                                <p class="text-sm text-gray-medium">contact@hbkcdsj.com</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="w-8 h-8 gradient-bg rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fa fa-clock-o text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">工作时间</h4>
+                                <p class="text-sm text-gray-medium">周一至周五 9:00-18:00</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <h3 class="text-xl font-bold mb-4">留言咨询</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">姓名</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-light rounded-lg input-focus" placeholder="请输入您的姓名">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">电话</label>
+                            <input type="tel" class="w-full px-4 py-2 border border-gray-light rounded-lg input-focus" placeholder="请输入您的电话">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">邮箱</label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-light rounded-lg input-focus" placeholder="请输入您的邮箱">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">留言内容</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-light rounded-lg input-focus" rows="4" placeholder="请输入您的留言内容"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            提交留言
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作伙伴 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4">合作伙伴</h2>
+                <p class="text-gray-medium max-w-2xl mx-auto">
+                    平台与多家知名企业、高校和科研机构建立了合作关系
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- 合作伙伴1 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <i class="fa fa-building text-primary text-3xl mb-2"></i>
+                        <p class="text-sm font-medium">合作伙伴1</p>
+                    </div>
+                </div>
+                
+                <!-- 合作伙伴2 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <i class="fa fa-building text-primary text-3xl mb-2"></i>
+                        <p class="text-sm font-medium">合作伙伴2</p>
+                    </div>
+                </div>
+                
+                <!-- 合作伙伴3 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <i class="fa fa-building text-primary text-3xl mb-2"></i>
+                        <p class="text-sm font-medium">合作伙伴3</p>
+                    </div>
+                </div>
+                
+                <!-- 合作伙伴4 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <i class="fa fa-building text-primary text-3xl mb-2"></i>
+                        <p class="text-sm font-medium">合作伙伴4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-6 mb-4">
+                    <a href="index.html" class="text-sm text-gray-dark hover:text-primary transition-colors">首页</a>
+                    <a href="platform-capabilities.html" class="text-sm text-gray-dark hover:text-primary transition-colors">平台能力</a>
+                    <a href="solutions.html" class="text-sm text-gray-dark hover:text-primary transition-colors">解决方案</a>
+                    <a href="about.html" class="text-sm text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="政策广场.html" class="text-sm text-gray-dark hover:text-primary transition-colors">政策广场</a>
+                    <a href="标准服务产品.html" class="text-sm text-gray-dark hover:text-primary transition-colors">科派派</a>
+                </div>
+                <p class="text-xs text-gray-medium">
+                    © 2026 湖北科创大数据平台 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

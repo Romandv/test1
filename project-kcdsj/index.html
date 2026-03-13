@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湖北科创大数据平台 - 产业数据与企业创新AI平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        accent: '#7B61FF',
+                        dark: '#0F172A',
+                        'dark-light': '#1E293B',
+                        'text-primary': '#FFFFFF',
+                        'text-secondary': '#94A3B8',
+                        'gray-light': '#334155',
+                        'gray-medium': '#64748B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #165DFF 0%, #7B61FF 100%);
+            }
+            .gradient-border {
+                border: 1px solid transparent;
+                background-clip: padding-box, border-box;
+                background-origin: padding-box, border-box;
+                background-image: linear-gradient(to right, #1E293B, #1E293B), linear-gradient(135deg, #165DFF, #7B61FF);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px -10px rgba(22, 93, 255, 0.2);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .nav-scrolled {
+                background-color: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(10px);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-dark text-text-primary min-h-screen">
+    <!-- 导航栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-xl">科</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-white">湖北科创大数据平台</h1>
+                        <p class="text-xs text-text-secondary">Innovation Data Platform</p>
+                    </div>
+                </div>
+                
+                <!-- 导航菜单 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="font-medium text-white hover:text-primary transition-colors">首页</a>
+                    <a href="#products" class="font-medium text-text-secondary hover:text-primary transition-colors">产品</a>
+                    <a href="#solutions" class="font-medium text-text-secondary hover:text-primary transition-colors">解决方案</a>
+                    <a href="#data-capabilities" class="font-medium text-text-secondary hover:text-primary transition-colors">数据能力</a>
+                    <a href="#ai-capabilities" class="font-medium text-text-secondary hover:text-primary transition-colors">AI能力</a>
+                    <a href="#cases" class="font-medium text-text-secondary hover:text-primary transition-colors">客户案例</a>
+                    <a href="#about" class="font-medium text-text-secondary hover:text-primary transition-colors">关于我们</a>
+                </nav>
+                
+                <!-- 右侧按钮 -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#contact" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        联系我们
+                    </a>
+                    <a href="#demo" class="px-4 py-2 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity">
+                        预约演示
+                    </a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button class="md:hidden text-text-primary focus:outline-none" id="mobileMenuButton">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端导航菜单 -->
+            <div class="md:hidden hidden" id="mobileMenu">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="#" class="font-medium text-white border-b-2 border-primary pb-1">首页</a>
+                    <a href="#products" class="font-medium text-text-secondary hover:text-primary transition-colors">产品</a>
+                    <a href="#solutions" class="font-medium text-text-secondary hover:text-primary transition-colors">解决方案</a>
+                    <a href="#data-capabilities" class="font-medium text-text-secondary hover:text-primary transition-colors">数据能力</a>
+                    <a href="#ai-capabilities" class="font-medium text-text-secondary hover:text-primary transition-colors">AI能力</a>
+                    <a href="#cases" class="font-medium text-text-secondary hover:text-primary transition-colors">客户案例</a>
+                    <a href="#about" class="font-medium text-text-secondary hover:text-primary transition-colors">关于我们</a>
+                    <div class="flex flex-col space-y-3 pt-3">
+                        <a href="#contact" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                            联系我们
+                        </a>
+                        <a href="#demo" class="px-4 py-2 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity text-center">
+                            预约演示
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero首屏 -->
+    <section class="pt-32 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark to-dark-light"></div>
+        <!-- 背景效果 -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- 左侧内容 -->
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                        产业数据与企业创新<span class="text-gradient">AI平台</span>
+                    </h1>
+                    <p class="text-xl text-text-secondary mb-8">
+                        基于高质量产业数据与AI技术<br>
+                        为政府、园区、企业与金融机构<br>
+                        提供数据 + AI + 咨询的一体化解决方案
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#products" class="px-6 py-3 gradient-bg rounded-lg hover:opacity-90 transition-opacity text-center">
+                            了解产品
+                        </a>
+                        <a href="#demo" class="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                            预约演示
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 右侧视觉 -->
+                <div class="md:w-1/2">
+                    <div class="relative">
+                        <div class="w-full h-96 bg-dark-light rounded-2xl overflow-hidden gradient-border">
+                            <!-- 产业图谱可视化 -->
+                            <div id="industryGraph" class="w-full h-full"></div>
+                        </div>
+                        <!-- 装饰元素 -->
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-accent/20 rounded-full filter blur-xl"></div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/20 rounded-full filter blur-xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心能力 -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark to-dark-light"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">我们的核心能力</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    依托强大的技术和数据能力，为用户提供全方位的科创服务
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 产业数据 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">产业数据</h3>
+                    <p class="text-text-secondary">
+                        企业、技术、产业链多维数据<br>
+                        构建产业数据底座
+                    </p>
+                </div>
+                
+                <!-- AI智能引擎 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-brain text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">AI智能引擎</h3>
+                    <p class="text-text-secondary">
+                        深度学习与自然语言处理<br>
+                        实现智能分析与决策
+                    </p>
+                </div>
+                
+                <!-- 企业创新管理 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-lightbulb-o text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">企业创新管理</h3>
+                    <p class="text-text-secondary">
+                        研发项目与知识产权<br>
+                        全生命周期管理
+                    </p>
+                </div>
+                
+                <!-- 产业研究 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-line-chart text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">产业研究</h3>
+                    <p class="text-text-secondary">
+                        产业链分析与趋势预测<br>
+                        为决策提供数据支撑
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品矩阵 -->
+    <section class="py-20 relative overflow-hidden" id="products">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-light to-dark"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">产品体系</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    为不同场景提供专业的解决方案
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 企业创新大脑 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">企业创新大脑</h3>
+                    <p class="text-text-secondary mb-6">
+                        企业研发与创新管理平台
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">研发项目</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">研发费用</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">知识产权</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">高企申报</span>
+                    </div>
+                    <a href="#" class="inline-block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        了解详情
+                    </a>
+                </div>
+                
+                <!-- 产业数据平台 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-sitemap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">产业数据平台</h3>
+                    <p class="text-text-secondary mb-6">
+                        多维度产业数据整合与分析平台
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">企业数据</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">产业链图谱</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">技术分析</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">趋势预测</span>
+                    </div>
+                    <a href="#" class="inline-block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        了解详情
+                    </a>
+                </div>
+                
+                <!-- AI创新助手 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI创新助手</h3>
+                    <p class="text-text-secondary mb-6">
+                        基于大模型的智能科创服务助手
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">政策解读</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">项目规划</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">专利分析</span>
+                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">智能问答</span>
+                    </div>
+                    <a href="#" class="inline-block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        了解详情
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务客户 -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark to-dark-light"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">服务客户</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    为不同类型的客户提供专业的科创服务
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 政府 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-building text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">政府</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">产业研究</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">企业创新评价</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">科技项目管理</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 园区 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-map-marker text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">园区</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">企业孵化</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">产业规划</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">资源对接</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 企业 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-briefcase text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">企业</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">政策申报</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">知识产权</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">创新管理</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 金融机构 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-bank text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">金融机构</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">企业信用评估</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">科技项目融资</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa fa-check-circle text-primary"></i>
+                            <span class="text-text-secondary text-sm">风险控制</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案 -->
+    <section class="py-20 relative overflow-hidden" id="solutions">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-light to-dark"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">解决方案</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    针对不同场景的专业解决方案
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 高企认定 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">高企认定</h3>
+                    <p class="text-text-secondary mb-6">
+                        为企业提供高新技术企业认定的全流程服务，包括政策解读、材料准备、申报指导等
+                    </p>
+                    <a href="#" class="text-primary hover:underline">了解详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                </div>
+                
+                <!-- 研发费用加计扣除 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">研发费用加计扣除</h3>
+                    <p class="text-text-secondary mb-6">
+                        帮助企业合理规划研发费用，享受税收优惠政策，提高企业创新投入积极性
+                    </p>
+                    <a href="#" class="text-primary hover:underline">了解详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                </div>
+                
+                <!-- 产业链研究 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">产业链研究</h3>
+                    <p class="text-text-secondary mb-6">
+                        深入分析产业链结构，为企业提供市场定位、竞争分析、合作伙伴筛选等服务
+                    </p>
+                    <a href="#" class="text-primary hover:underline">了解详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                </div>
+                
+                <!-- 企业创新评价 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">企业创新评价</h3>
+                    <p class="text-text-secondary mb-6">
+                        基于多维度指标，对企业创新能力进行全面评价，为企业提供改进建议
+                    </p>
+                    <a href="#" class="text-primary hover:underline">了解详情 <i class="fa fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI能力 -->
+    <section class="py-20 relative overflow-hidden" id="ai-capabilities">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark to-dark-light"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">AI能力</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    基于先进的AI技术，为用户提供智能化的服务体验
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- 左侧：AI架构图 -->
+                <div class="md:w-1/2">
+                    <div class="bg-dark-light rounded-xl p-6 gradient-border">
+                        <div class="w-full h-80 flex items-center justify-center">
+                            <!-- AI架构图 -->
+                            <div class="w-full max-w-md">
+                                <div class="text-center mb-6">
+                                    <div class="inline-block px-4 py-2 bg-primary/20 text-primary rounded-lg">
+                                        大模型
+                                    </div>
+                                </div>
+                                <div class="flex justify-center mb-6">
+                                    <i class="fa fa-arrow-down text-primary text-2xl"></i>
+                                </div>
+                                <div class="text-center mb-6">
+                                    <div class="inline-block px-4 py-2 bg-primary/20 text-primary rounded-lg">
+                                        RAG知识库
+                                    </div>
+                                </div>
+                                <div class="flex justify-center mb-6">
+                                    <i class="fa fa-arrow-down text-primary text-2xl"></i>
+                                </div>
+                                <div class="text-center">
+                                    <div class="inline-block px-4 py-2 bg-primary/20 text-primary rounded-lg">
+                                        AI助手
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧：AI能力介绍 -->
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6">AI创新助手</h3>
+                    <div class="space-y-6">
+                        <div class="bg-dark-light rounded-lg p-4">
+                            <h4 class="font-bold mb-2">RAG知识库</h4>
+                            <p class="text-text-secondary text-sm">
+                                基于检索增强生成技术，结合企业内部知识和外部数据，为用户提供精准的信息和建议
+                            </p>
+                        </div>
+                        <div class="bg-dark-light rounded-lg p-4">
+                            <h4 class="font-bold mb-2">多模型能力</h4>
+                            <p class="text-text-secondary text-sm">
+                                支持多种大语言模型，包括GPT、Claude、Gemini、DeepSeek、Qwen等，为不同场景提供最优解决方案
+                            </p>
+                        </div>
+                        <div class="bg-dark-light rounded-lg p-4">
+                            <h4 class="font-bold mb-2">智能分析</h4>
+                            <p class="text-text-secondary text-sm">
+                                基于AI技术，实现对企业数据、产业数据的智能分析，为决策提供数据支撑
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 支持模型展示 -->
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4">支持模型</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">GPT</span>
+                            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Claude</span>
+                            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Gemini</span>
+                            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">DeepSeek</span>
+                            <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Qwen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据能力 -->
+    <section class="py-20 relative overflow-hidden" id="data-capabilities">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-light to-dark"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">数据能力</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    汇聚全球科技数据，为企业提供全面、精准的科创信息支持
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- 企业数据 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">企业数据</h3>
+                    <p class="text-text-secondary mb-6">
+                        包含企业基本信息、股权结构、投融资信息、法律相关信息等多维度数据
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-text-secondary text-sm">覆盖企业数量</span>
+                        <span class="text-primary font-bold">2亿+</span>
+                    </div>
+                </div>
+                
+                <!-- 科技创新数据 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">科技创新数据</h3>
+                    <p class="text-text-secondary mb-6">
+                        包含专利、论文、科技项目、科研机构等科技创新相关数据
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-text-secondary text-sm">专利数据</span>
+                        <span class="text-primary font-bold">1.4亿+</span>
+                    </div>
+                </div>
+                
+                <!-- 产业链数据 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">产业链数据</h3>
+                    <p class="text-text-secondary mb-6">
+                        包含7000+领域产业链数据，产业链上不同节点的技术、企业、机构信息
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-text-secondary text-sm">覆盖领域</span>
+                        <span class="text-primary font-bold">7000+</span>
+                    </div>
+                </div>
+                
+                <!-- 政策数据 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 gradient-border">
+                    <h3 class="text-xl font-bold mb-4">政策数据</h3>
+                    <p class="text-text-secondary mb-6">
+                        包含国家、地方各级政府的科技政策、产业政策、税收政策等
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-text-secondary text-sm">政策数量</span>
+                        <span class="text-primary font-bold">10万+</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 数据规模 -->
+            <div class="bg-dark-light rounded-xl p-8 gradient-border">
+                <h3 class="text-2xl font-bold mb-8 text-center">数据规模</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gradient mb-2">200亿+</div>
+                        <p class="text-text-secondary">全球科技文本数据</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gradient mb-2">2.5亿+</div>
+                        <p class="text-text-secondary">全球科技实体数据</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gradient mb-2">50亿+</div>
+                        <p class="text-text-secondary">科技实体语义数据</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gradient mb-2">7000+</div>
+                        <p class="text-text-secondary">全球产业数据</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户案例 -->
+    <section class="py-20 relative overflow-hidden" id="cases">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark to-dark-light"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">客户案例</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    为不同行业的客户提供专业的科创服务
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- 客户LOGO 1 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 2 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 3 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 4 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 5 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 6 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 7 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+                <!-- 客户LOGO 8 -->
+                <div class="card-hover bg-dark-light rounded-xl p-6 flex items-center justify-center">
+                    <div class="text-2xl font-bold text-primary">客户LOGO</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="py-20 relative overflow-hidden" id="about">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-light to-dark"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">关于我们</h2>
+                <p class="text-text-secondary max-w-2xl mx-auto">
+                    专注于为企业提供科创服务的科技公司
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- 左侧：公司介绍 -->
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6">湖北科创大数据平台</h3>
+                    <p class="text-text-secondary mb-6">
+                        湖北科创大数据平台基于业务场景，创新性对数据进行异构处理，实现了科技数据与其它数据的共融。平台汇聚全球200亿+科技文本数据，2.5亿+科技实体数据，为政府、园区、企业与金融机构提供数据 + AI + 咨询的一体化解决方案。
+                    </p>
+                    <p class="text-text-secondary mb-6">
+                        我们致力于通过技术创新和数据驱动，帮助企业提升创新能力，促进产业升级，为中国科技创新发展贡献力量。
+                    </p>
+                    <a href="#contact" class="inline-block px-4 py-2 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity">
+                        联系我们
+                    </a>
+                </div>
+                
+                <!-- 右侧：数字 -->
+                <div class="md:w-1/2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                            <div class="text-3xl font-bold text-gradient mb-2">12年</div>
+                            <p class="text-text-secondary">产业研究经验</p>
+                        </div>
+                        <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                            <div class="text-3xl font-bold text-gradient mb-2">数千万</div>
+                            <p class="text-text-secondary">产业数据</p>
+                        </div>
+                        <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                            <div class="text-3xl font-bold text-gradient mb-2">多个</div>
+                            <p class="text-text-secondary">行业客户</p>
+                        </div>
+                        <div class="card-hover bg-dark-light rounded-xl p-6 text-center">
+                            <div class="text-3xl font-bold text-gradient mb-2">7000+</div>
+                            <p class="text-text-secondary">领域覆盖</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA联系 -->
+    <section class="py-20 relative overflow-hidden" id="demo">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark to-dark-light"></div>
+        <!-- 背景效果 -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-6">
+                    想了解我们的产品？
+                </h2>
+                <p class="text-xl text-text-secondary mb-8">
+                    预约产品演示，了解如何利用AI和数据技术提升企业创新能力
+                </p>
+                <a href="#contact" class="inline-block px-8 py-4 gradient-bg text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+                    预约产品演示
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark border-t border-gray-light py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- 公司信息 -->
+                <div class="md:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-xl">科</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">湖北科创大数据平台</h3>
+                        </div>
+                    </div>
+                    <p class="text-text-secondary text-sm mb-4">
+                        基于高质量产业数据与AI技术，为政府、园区、企业与金融机构提供数据 + AI + 咨询的一体化解决方案
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-text-secondary hover:text-primary transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+                
+                <!-- 产品 -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">产品</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">企业创新大脑</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">产业数据平台</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">AI创新助手</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">政策服务</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 解决方案 -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">解决方案</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">高企认定</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">研发费用加计扣除</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">产业链研究</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">企业创新评价</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 关于我们 -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">关于我们</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">公司简介</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">团队介绍</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">客户案例</a></li>
+                        <li><a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-light pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-text-secondary text-sm mb-4 md:mb-0">
+                    © 2026 湖北科创大数据平台 版权所有
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">隐私政策</a>
+                    <a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">服务条款</a>
+                    <a href="#" class="text-text-secondary hover:text-primary transition-colors text-sm">网站地图</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+        
+        // 移动端菜单交互
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 产业图谱可视化
+        document.addEventListener('DOMContentLoaded', function() {
+            const industryGraph = document.getElementById('industryGraph');
+            
+            // 创建简单的产业图谱效果
+            const canvas = document.createElement('canvas');
+            canvas.width = industryGraph.offsetWidth;
+            canvas.height = industryGraph.offsetHeight;
+            industryGraph.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // 绘制节点
+            const nodes = [
+                { x: 100, y: 150, label: '企业' },
+                { x: 300, y: 100, label: '专利' },
+                { x: 300, y: 200, label: '技术' },
+                { x: 500, y: 150, label: '产业链' }
+            ];
+            
+            // 绘制连接线
+            const connections = [
+                { from: 0, to: 1 },
+                { from: 0, to: 2 },
+                { from: 1, to: 3 },
+                { from: 2, to: 3 }
+            ];
+            
+            function drawGraph() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 绘制连接线
+                connections.forEach(connection => {
+                    const fromNode = nodes[connection.from];
+                    const toNode = nodes[connection.to];
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(fromNode.x, fromNode.y);
+                    ctx.lineTo(toNode.x, toNode.y);
+                    ctx.strokeStyle = 'rgba(22, 93, 255, 0.5)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+                
+                // 绘制节点
+                nodes.forEach(node => {
+                    // 绘制节点圆圈
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, 20, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(22, 93, 255, 0.2)';
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(22, 93, 255, 0.8)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // 绘制节点标签
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = '14px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.label, node.x, node.y);
+                });
+                
+                // 动画效果
+                nodes.forEach(node => {
+                    node.x += (Math.random() - 0.5) * 2;
+                    node.y += (Math.random() - 0.5) * 2;
+                    
+                    // 边界检查
+                    node.x = Math.max(30, Math.min(canvas.width - 30, node.x));
+                    node.y = Math.max(30, Math.min(canvas.height - 30, node.y));
+                });
+                
+                requestAnimationFrame(drawGraph);
+            }
+            
+            drawGraph();
+        });
+    </script>
+</body>
+</html>

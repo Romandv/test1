@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科派派 - 湖北科创大数据平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .sidebar-item {
+                transition: all 0.2s ease;
+            }
+            .sidebar-item:hover {
+                background: rgba(22, 93, 255, 0.1);
+            }
+            .sidebar-item.active {
+                background: rgba(22, 93, 255, 0.1);
+                border-left: 3px solid #165DFF;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            }
+            .btn-primary {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #0F4ED9 0%, #0DB8A6 100%);
+            }
+            .input-focus {
+                transition: all 0.3s ease;
+            }
+            .input-focus:focus {
+                border-color: #165DFF;
+                box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-xl">科</span>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-primary">科派派</h1>
+                            <p class="text-xs text-gray-medium">湖北科创大数据平台</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 导航菜单 -->
+                    <nav class="hidden md:flex items-center space-x-6 ml-10">
+                        <a href="科创大数据平台智能体矩阵.html" class="font-medium text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors">首页</a>
+                        <a href="政策广场.html" class="font-medium text-gray-dark hover:text-primary transition-colors">政策广场</a>
+                        <a href="科创服务商城详情页.html" class="font-medium text-gray-dark hover:text-primary transition-colors">服务商城</a>
+                        <div class="relative group">
+                            <a href="标准服务产品.html" class="font-medium text-gray-dark hover:text-primary transition-colors flex items-center gap-1">
+                                标准服务产品
+                                <i class="fa fa-angle-down text-xs transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            <!-- 下拉菜单 -->
+                            <div class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <div class="py-1">
+                                    <a href="标准服务产品.html#growth-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">企业成长陪跑包</a>
+                                    <a href="标准服务产品.html#quality-plan" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">提质计划包</a>
+                                    <a href="标准服务产品.html#ipo-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">上市包</a>
+                                    <a href="标准服务产品.html#special-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">专项解决包</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">科创大数据</a>
+                    </nav>
+                </div>
+                
+                <!-- 右侧登录注册 -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-dark hover:text-primary transition-colors">登录</a>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">注册</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="flex gap-6">
+            <!-- 左侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-sm p-4 h-full">
+                    <!-- 科创管家智能体矩阵标题 -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-bold text-lg">科创管家智能体矩阵</h2>
+                        <button class="text-xs text-primary hover:underline">更多</button>
+                    </div>
+                    
+                    <!-- 新对话 -->
+                    <div class="mb-4">
+                        <button class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus"></i>
+                            <span>新对话</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 最近对话 -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">最近对话</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-item active p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm">新对话</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-gray-medium rounded-full"></div>
+                                <span class="text-sm">科创企业有什么优惠政策</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特色应用 -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">特色应用</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-item active p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-bar-chart text-primary"></i>
+                                <span class="text-sm">测评智能体矩阵</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-lightbulb-o text-primary"></i>
+                                <span class="text-sm">知识产权服务助手</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-file-text-o text-primary"></i>
+                                <span class="text-sm">政策服务智能体</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 底部用户信息 -->
+                    <div class="mt-6 pt-4 border-t border-gray-light">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <i class="fa fa-user text-gray-medium"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">用户名称</p>
+                                <p class="text-xs text-gray-medium">普通用户</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中间主内容 -->
+            <div class="flex-1">
+                <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                    <!-- 测评智能体矩阵标题 -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fa fa-bar-chart text-primary text-xl"></i>
+                            <h2 class="font-bold text-lg">测评智能体矩阵</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-gray-medium">智能测评矩阵，赋能企业项目高效申报</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 测评卡片网格 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <!-- 高企达标测评 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium">高企达标测评</span>
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-graduation-cap text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-medium mb-4">模板的简要文案，文案说明</p>
+                            <div class="flex items-center justify-between">
+                                <button class="text-xs text-primary hover:underline">文案说明</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 专精特新达标测评 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium">专精特新达标测评</span>
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-trophy text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-medium mb-4">模板的简要文案，文案说明</p>
+                            <div class="flex items-center justify-between">
+                                <button class="text-xs text-primary hover:underline">文案说明</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 上市销售达标测评 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium">上市销售达标测评</span>
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-line-chart text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-medium mb-4">模板的简要文案，文案说明</p>
+                            <div class="flex items-center justify-between">
+                                <button class="text-xs text-primary hover:underline">文案说明</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 领军企业达标测评 -->
+                        <div class="card-hover border border-gray-light rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium">领军企业达标测评</span>
+                                <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
+                                    <i class="fa fa-star text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-medium mb-4">模板的简要文案，文案说明</p>
+                            <div class="flex items-center justify-between">
+                                <button class="text-xs text-primary hover:underline">文案说明</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <!-- 底部输入区域 -->
+                    <div class="mt-8">
+                        <div class="flex items-center gap-2 mb-2">
+                            <button class="px-3 py-1 text-xs bg-gray-light text-gray-dark rounded-lg hover:bg-gray-200 transition-colors">
+                                <i class="fa fa-paperclip mr-1"></i>文件
+                            </button>
+                            <button class="px-3 py-1 text-xs bg-gray-light text-gray-dark rounded-lg hover:bg-gray-200 transition-colors">
+                                <i class="fa fa-microphone mr-1"></i>语音
+                            </button>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <textarea 
+                                   placeholder="请输入文本" 
+                                   class="flex-1 px-4 py-3 border border-gray-light rounded-lg input-focus resize-none overflow-hidden"
+                                   id="messageInput"
+                                   rows="3"
+                                   style="min-height: 80px; max-height: 200px;"></textarea>
+                            <button class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center hover:bg-primary/90 transition-colors flex-shrink-0 mt-auto" onclick="sendMessage()">
+                                <i class="fa fa-paper-plane text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="space-y-6">
+                    <!-- 热搜 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold">热搜</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">图片图片</p>
+                                <p class="text-xs text-gray-medium">产品说明，产品说明，产品说明，产品说明，产品说明，要太多会自动换行</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">图片图片</p>
+                                <p class="text-xs text-gray-medium">产品说明，产品说明，产品说明，产品说明，产品说明，要太多会自动换行</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 推荐产品 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold">推荐产品</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">图片图片</p>
+                                <p class="text-xs text-gray-medium">产品说明，产品说明，产品说明，产品说明，产品说明，要太多会自动换行</p>
+                                <button class="mt-2 text-xs text-primary hover:underline">立即咨询</button>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">图片图片</p>
+                                <p class="text-xs text-gray-medium">产品说明，产品说明，产品说明，产品说明，产品说明，要太多会自动换行</p>
+                                <button class="mt-2 text-xs text-primary hover:underline">立即咨询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-6 mb-4">
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">服务条款</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">隐私政策</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">联系我们</a>
+                </div>
+                <p class="text-xs text-gray-medium">
+                    © 2026 科派 - 湖北科创大数据平台 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (message) {
+                console.log('发送消息:', message);
+                // 这里可以添加消息发送逻辑
+                input.value = '';
+            }
+        }
+
+        // Ctrl+Enter 发送消息（textarea使用Ctrl+Enter避免换行冲突）
+        document.getElementById('messageInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // 测评卡片点击事件
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('点击测评卡片:', this.querySelector('span').textContent);
+                // 这里可以添加卡片点击逻辑
+            });
+        });
+
+        // 侧边栏项点击事件
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除其他项的active状态
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                // 添加当前项的active状态
+                this.classList.add('active');
+            });
+        });
+
+        // 自动调整输入框高度
+        const messageInput = document.getElementById('messageInput');
+        
+        function autoResizeTextarea() {
+            messageInput.style.height = 'auto';
+            const newHeight = Math.min(messageInput.scrollHeight, 200);
+            messageInput.style.height = newHeight + 'px';
+        }
+        
+        messageInput.addEventListener('input', autoResizeTextarea);
+        
+        // 发送消息后重置高度
+        const originalSendMessage = sendMessage;
+        sendMessage = function() {
+            originalSendMessage();
+            messageInput.style.height = '80px';
+        };
+    </script>
+</body>
+</html>

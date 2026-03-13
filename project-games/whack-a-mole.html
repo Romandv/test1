@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古拉哈捉迷藏・暴打版 - 女生节快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .game-header {
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #e63946;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .score-timer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #457b9d;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .hole {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            background: #1d3557;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .mole {
+            position: absolute;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            transition: bottom 0.3s ease;
+        }
+        
+        .mole img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .mole.active {
+            bottom: 10%;
+        }
+        
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 100;
+            display: none;
+        }
+        
+        .game-over h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff9a9e;
+        }
+        
+        .game-over p {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .happy-girls-day {
+            font-size: 28px;
+            color: #fecfef;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%);
+            color: #1d3557;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.5);
+        }
+        
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+        
+        .start-screen h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff9a9e;
+        }
+        
+        .start-screen p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .score-timer {
+                font-size: 18px;
+            }
+            
+            .game-grid {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>古拉哈捉迷藏・暴打版</h1>
+            <div class="score-timer">
+                <div class="score">分数: <span id="score">0</span></div>
+                <div class="timer">时间: <span id="timer">60</span></div>
+            </div>
+        </div>
+        
+        <div class="game-grid" id="gameGrid">
+            <div class="hole" data-index="0">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="1">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="2">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="3">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="4">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="5">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">  
+                </div>
+            </div>
+            <div class="hole" data-index="6">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="7">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+            <div class="hole" data-index="8">
+                <div class="mole">
+                    <img src="images\17b1ee34-c081-4b04-8d77-b0f2f4f91910.png" alt="地鼠">
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>游戏结束!</h2>
+            <p>最终分数: <span id="finalScore">0</span></p>
+            <div class="happy-girls-day">女生节快乐!</div>
+            <button class="btn" onclick="restartGame()">重新开始</button>
+        </div>
+        
+        <div class="start-screen" id="startScreen">
+            <h1>古拉哈捉迷藏・暴打版</h1>
+            <p>点击或触摸出现的地鼠，在60秒内获得尽可能高的分数！</p>
+            <button class="btn" onclick="startGame()">开始游戏</button>
+        </div>
+    </div>
+    
+    <script>
+        const gameGrid = document.getElementById('gameGrid');
+        const holes = document.querySelectorAll('.hole');
+        const scoreElement = document.getElementById('score');
+        const timerElement = document.getElementById('timer');
+        const gameOverElement = document.getElementById('gameOver');
+        const finalScoreElement = document.getElementById('finalScore');
+        const startScreen = document.getElementById('startScreen');
+        
+        let score = 0;
+        let timeLeft = 60;
+        let gameInterval;
+        let timerInterval;
+        let activeMoleIndex = -1;
+        
+        // 点击/触摸事件处理
+        holes.forEach(hole => {
+            hole.addEventListener('click', handleMoleClick);
+            hole.addEventListener('touchstart', handleMoleClick);
+        });
+        
+        function handleMoleClick(e) {
+            e.preventDefault();
+            const hole = e.currentTarget;
+            const mole = hole.querySelector('.mole');
+            
+            if (mole.classList.contains('active')) {
+                score += 10;
+                scoreElement.textContent = score;
+                mole.classList.remove('active');
+                
+                // 添加点击特效
+                createClickEffect(hole);
+            }
+        }
+        
+        // 创建点击特效
+        function createClickEffect(hole) {
+            const effect = document.createElement('div');
+            effect.style.position = 'absolute';
+            effect.style.top = '50%';
+            effect.style.left = '50%';
+            effect.style.transform = 'translate(-50%, -50%)';
+            effect.style.width = '80%';
+            effect.style.height = '80%';
+            effect.style.background = 'radial-gradient(circle, rgba(255,154,158,0.8) 0%, rgba(254,207,239,0) 70%)';
+            effect.style.borderRadius = '50%';
+            effect.style.animation = 'pulse 0.5s ease-out forwards';
+            hole.appendChild(effect);
+            
+            setTimeout(() => {
+                effect.remove();
+            }, 500);
+        }
+        
+        // 开始游戏
+        function startGame() {
+            startScreen.style.display = 'none';
+            resetGame();
+            gameInterval = setInterval(spawnMole, 800);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        // 重置游戏
+        function resetGame() {
+            score = 0;
+            timeLeft = 60;
+            scoreElement.textContent = score;
+            timerElement.textContent = timeLeft;
+            
+            // 隐藏所有地鼠
+            holes.forEach(hole => {
+                hole.querySelector('.mole').classList.remove('active');
+            });
+            
+            gameOverElement.style.display = 'none';
+        }
+        
+        // 生成地鼠
+        function spawnMole() {
+            // 隐藏当前活动的地鼠
+            if (activeMoleIndex !== -1) {
+                holes[activeMoleIndex].querySelector('.mole').classList.remove('active');
+            }
+            
+            // 随机选择一个洞
+            activeMoleIndex = Math.floor(Math.random() * holes.length);
+            holes[activeMoleIndex].querySelector('.mole').classList.add('active');
+        }
+        
+        // 更新计时器
+        function updateTimer() {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }
+        
+        // 结束游戏
+        function endGame() {
+            clearInterval(gameInterval);
+            clearInterval(timerInterval);
+            
+            // 隐藏所有地鼠
+            holes.forEach(hole => {
+                hole.querySelector('.mole').classList.remove('active');
+            });
+            
+            finalScoreElement.textContent = score;
+            gameOverElement.style.display = 'flex';
+        }
+        
+        // 重新开始游戏
+        function restartGame() {
+            startGame();
+        }
+    </script>
+</body>
+</html>

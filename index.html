@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品原型合集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px -10px rgba(22, 93, 255, 0.15);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-xl">科</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-primary">产品原型合集</h1>
+                        <p class="text-xs text-gray-medium">Product Prototype Collection</p>
+                    </div>
+                </div>
+                <!-- 登录注册按钮 -->
+                <div class="flex items-center gap-3">
+                    <button id="loginButton" class="px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                        登录
+                    </button>
+                    <button id="registerButton" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                        注册
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">原型列表</h2>
+                <p class="text-gray-medium">
+                    以下是我们的产品原型项目，点击链接查看详细内容
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 科创大数据平台 -->
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">科创大数据平台</h3>
+                    <p class="text-gray-medium mb-4">
+                        湖北科创大数据平台主站，包含平台能力、解决方案、关于我们等页面
+                    </p>
+                    <a href="project-kcdsj/index.html" class="block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                        查看项目
+                    </a>
+                </div>
+                
+                <!-- 科创大数据平台智能体矩阵 -->
+                <!-- 
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">智能体矩阵</h3>
+                    <p class="text-gray-medium mb-4">
+                        科创大数据平台智能体矩阵页面，包含AI企业管家、政策智能体等功能
+                    </p>
+                    <a href="科创大数据平台智能体矩阵.html" class="block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                        查看项目
+                    </a>
+                </div>
+                -->
+                
+                <!-- 政策广场 -->
+                 <!-- 
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-file-text-o text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">政策广场</h3>
+                    <p class="text-gray-medium mb-4">
+                        政策广场页面，包含政策搜索、筛选、列表展示及分类推荐功能
+                    </p>
+                    <a href="政策广场.html" class="block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                        查看项目
+                    </a>
+                </div>
+                -->
+                <!-- 标准服务产品 -->
+                <!-- 
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-shopping-bag text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">标准服务产品</h3>
+                    <p class="text-gray-medium mb-4">
+                        标准服务产品页面，展示企业成长陪跑包、提质计划包等产品信息
+                    </p>
+                    <a href="标准服务产品.html" class="block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                        查看项目
+                    </a>
+                </div>
+                -->
+                <!-- 科创服务商城详情页 -->
+                <!-- 
+                <div class="card-hover bg-white rounded-xl p-6 shadow-sm">
+                    <div class="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-shopping-cart text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">科创服务商城详情页</h3>
+                    <p class="text-gray-medium mb-4">
+                        科创服务商城详情页，展示服务详情、价格、购买选项及相关推荐
+                    </p>
+                    <a href="科创服务商城详情页.html" class="block px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                        查看项目
+                    </a>
+                </div>
+                -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 折叠菜单 -->
+    <section class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <button id="leisureMenuButton" class="w-full flex items-center justify-between px-4 py-3 bg-gray-light rounded-lg hover:bg-gray-200 transition-colors">
+                    <span class="font-medium">更多功能</span>
+                    <i class="fa fa-chevron-down text-gray-medium transition-transform" id="leisureMenuIcon"></i>
+                </button>
+                <div id="leisureMenuContent" class="hidden mt-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="project-games/whack-a-mole.html" class="block px-4 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                            休闲
+                        </a>
+                        <a href="project-games/snake-game.html" class="block px-4 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors text-center">
+                            限定
+                        </a>
+                        <button class="px-4 py-3 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                            其他
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-12 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-xs text-gray-medium">
+                    © 2026 产品原型合集 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 登录模态框 -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">登录</h3>
+                <button id="closeLoginModal" class="text-gray-medium hover:text-gray-dark">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-gray-dark mb-2">用户名</label>
+                    <input type="text" id="loginUsername" class="w-full px-4 py-2 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-dark mb-2">密码</label>
+                    <input type="password" id="loginPassword" class="w-full px-4 py-2 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <button type="submit" class="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    登录
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 注册模态框 -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">注册</h3>
+                <button id="closeRegisterModal" class="text-gray-medium hover:text-gray-dark">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="registerForm">
+                <div class="mb-4">
+                    <label class="block text-gray-dark mb-2">用户名</label>
+                    <input type="text" id="registerUsername" class="w-full px-4 py-2 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-dark mb-2">密码</label>
+                    <input type="password" id="registerPassword" class="w-full px-4 py-2 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-dark mb-2">确认密码</label>
+                    <input type="password" id="registerConfirmPassword" class="w-full px-4 py-2 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <button type="submit" class="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    注册
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 休闲菜单交互
+        document.getElementById('leisureMenuButton').addEventListener('click', function() {
+            const leisureMenuContent = document.getElementById('leisureMenuContent');
+            const leisureMenuIcon = document.getElementById('leisureMenuIcon');
+            
+            leisureMenuContent.classList.toggle('hidden');
+            leisureMenuIcon.classList.toggle('rotate-180');
+        });
+
+        // 登录模态框交互
+        const loginModal = document.getElementById('loginModal');
+        const loginButton = document.getElementById('loginButton');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+
+        loginButton.addEventListener('click', function() {
+            loginModal.classList.remove('hidden');
+        });
+
+        closeLoginModal.addEventListener('click', function() {
+            loginModal.classList.add('hidden');
+        });
+
+        // 注册模态框交互
+        const registerModal = document.getElementById('registerModal');
+        const registerButton = document.getElementById('registerButton');
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+
+        registerButton.addEventListener('click', function() {
+            registerModal.classList.remove('hidden');
+        });
+
+        closeRegisterModal.addEventListener('click', function() {
+            registerModal.classList.add('hidden');
+        });
+
+        // 密码加密函数
+        function hashPassword(password) {
+            return btoa(password); // 简单的Base64编码，实际应用中应使用更安全的加密方式
+        }
+
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            fetch('http://localhost:8003/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('登录成功');
+                    loginModal.classList.add('hidden');
+                } else {
+                    alert('登录失败: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('登录失败，请稍后重试');
+            });
+        });
+
+        // 注册表单提交
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致');
+                return;
+            }
+
+            fetch('http://localhost:8003/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('注册成功');
+                    registerModal.classList.add('hidden');
+                } else {
+                    alert('注册失败: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('注册失败，请稍后重试');
+            });
+        });
+    </script>
+</body>
+</html>

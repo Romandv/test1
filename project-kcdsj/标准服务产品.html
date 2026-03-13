@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标准服务产品 - 科派派</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#0FC6C2',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        dark: '#1D2129',
+                        'gray-light': '#F2F3F5',
+                        'gray-medium': '#86909C',
+                        'gray-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .sidebar-item {
+                transition: all 0.2s ease;
+            }
+            .sidebar-item:hover {
+                background: rgba(22, 93, 255, 0.1);
+            }
+            .sidebar-item.active {
+                background: rgba(22, 93, 255, 0.1);
+                border-left: 3px solid #165DFF;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            }
+            .btn-primary {
+                background: linear-gradient(135deg, #165DFF 0%, #0FC6C2 100%);
+            }
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #0F4ED9 0%, #0DB8A6 100%);
+            }
+            .input-focus {
+                transition: all 0.3s ease;
+            }
+            .input-focus:focus {
+                border-color: #165DFF;
+                box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+            }
+            .product-card {
+                transition: all 0.3s ease;
+            }
+            .product-card:hover {
+                border-color: #165DFF;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-dark min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo和标题 -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <span class="text-white font-bold text-xl">科</span>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-primary">科派</h1>
+                            <p class="text-xs text-gray-medium">湖北科创大数据平台</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 导航菜单 -->
+                    <nav class="hidden md:flex items-center space-x-6 ml-10">
+                        <a href="科创大数据平台智能体矩阵.html" class="font-medium text-gray-dark hover:text-primary transition-colors">首页</a>
+                        <a href="政策广场.html" class="font-medium text-gray-dark hover:text-primary transition-colors">政策广场</a>
+                        <a href="科创服务商城详情页.html" class="font-medium text-gray-dark hover:text-primary transition-colors">服务商城</a>
+                        <div class="relative group">
+                            <a href="标准服务产品.html" class="font-medium text-primary border-b-2 border-primary pb-1 flex items-center gap-1">
+                                标准服务产品
+                                <i class="fa fa-angle-down text-xs transition-transform group-hover:rotate-180"></i>
+                            </a>
+                            <!-- 下拉菜单 -->
+                            <div class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <div class="py-1">
+                                    <a href="标准服务产品.html#growth-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">企业成长陪跑包</a>
+                                    <a href="标准服务产品.html#quality-plan" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">提质计划包</a>
+                                    <a href="标准服务产品.html#ipo-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">上市包</a>
+                                    <a href="标准服务产品.html#special-package" class="block px-4 py-2 text-sm text-gray-dark hover:bg-gray-50 hover:text-primary transition-colors" onclick="this.classList.add('bg-primary', 'text-white'); setTimeout(() => this.classList.remove('bg-primary', 'text-white'), 200);">专项解决包</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="index.html" class="font-medium text-gray-dark hover:text-primary transition-colors">科创大数据</a>
+                    </nav>
+                </div>
+                
+                <!-- 右侧登录注册 -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-dark hover:text-primary transition-colors">登录</a>
+                    <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">注册</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="flex gap-6">
+            <!-- 左侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-sm p-4 h-full">
+                    <!-- 科创管家智能体矩阵标题 -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-bold text-lg">科创管家智能体矩阵</h2>
+                        <button class="text-xs text-primary hover:underline">更多</button>
+                    </div>
+                    
+                    <!-- 新对话 -->
+                    <div class="mb-4">
+                        <button class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus"></i>
+                            <span>新对话</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 最近对话 -->
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">最近对话</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-success rounded-full"></div>
+                                <span class="text-sm">新对话</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <div class="w-2 h-2 bg-gray-medium rounded-full"></div>
+                                <span class="text-sm">科创企业有什么优惠政策</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 特色应用 -->
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-medium mb-2">特色应用</h3>
+                        <div class="space-y-1">
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-bar-chart text-primary"></i>
+                                <span class="text-sm">测评智能体矩阵</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-lightbulb-o text-primary"></i>
+                                <span class="text-sm">知识产权服务助手</span>
+                            </div>
+                            <div class="sidebar-item p-3 rounded-lg flex items-center gap-3">
+                                <i class="fa fa-file-text-o text-primary"></i>
+                                <span class="text-sm">政策服务智能体</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 底部用户信息 -->
+                    <div class="mt-6 pt-4 border-t border-gray-light">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <i class="fa fa-user text-gray-medium"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">用户名称</p>
+                                <p class="text-xs text-gray-medium">普通用户</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中间主内容 -->
+            <div class="flex-1">
+                <div class="bg-white rounded-xl shadow-sm p-6 h-full">
+                    <!-- 标准服务产品标题 -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fa fa-shopping-cart text-primary text-xl"></i>
+                            <h2 class="font-bold text-lg">标准服务产品</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-gray-medium">AI赋能标准化服务，解决企业核心痛点</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品分类导航 -->
+                    <div class="flex items-center gap-4 mb-8">
+                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors" onclick="scrollToProduct('growth-package')">企业成长陪跑包</button>
+                        <button class="px-4 py-2 text-gray-dark border border-gray-light rounded-lg hover:border-primary hover:text-primary transition-colors" onclick="scrollToProduct('quality-plan')">提质计划包</button>
+                        <button class="px-4 py-2 text-gray-dark border border-gray-light rounded-lg hover:border-primary hover:text-primary transition-colors" onclick="scrollToProduct('ipo-package')">上市包</button>
+                        <button class="px-4 py-2 text-gray-dark border border-gray-light rounded-lg hover:border-primary hover:text-primary transition-colors" onclick="scrollToProduct('special-package')">专项解决包</button>
+                    </div>
+                    
+                    <!-- 产品详情展示 -->
+                    <div class="space-y-8">
+                        <!-- 企业成长陪跑包 -->
+                        <div id="growth-package" class="product-card border border-gray-light rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4">企业成长陪跑包</h3>
+                            <p class="text-sm text-gray-medium mb-6">解决“初创/成长期企业无系统规划”痛点</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold mb-3">目标客户</h4>
+                                    <p class="text-sm text-gray-dark">成立1-5年、年营收500万-5000万的科技企业（占科技企业80%）</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">核心痛点</h4>
+                                    <p class="text-sm text-gray-dark">政策看不懂、申报材料乱、研发合规风险高，导致错失补贴、延误上市</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">派富AI赋能点</h4>
+                                    <p class="text-sm text-gray-dark">AI自动匹配政策+生成申报材料框架+合规风险实时预警</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">保障</h4>
+                                    <p class="text-sm text-gray-dark">派富AI已集成政策数据库，服务交付全自动化，无需额外人力。企业无需复杂流程，签约后自动开通AI平台，30分钟内收到首份《政策匹配报告》</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-light">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-lg font-bold text-danger">¥12,000/年</span>
+                                    <span class="text-sm text-gray-medium line-through">¥36,000/年</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <button class="px-6 py-2 text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">了解详情</button>
+                                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即购买</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 提质计划包 -->
+                        <div id="quality-plan" class="product-card border border-gray-light rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4">提质计划包：专精特新培育系列</h3>
+                            <p class="text-sm text-gray-medium mb-6">解决“申报难、成功率低”痛点</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold mb-3">目标客户</h4>
+                                    <p class="text-sm text-gray-dark">拟申报“专精特新”但无经验的企业（占科技企业25%）</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">核心痛点</h4>
+                                    <p class="text-sm text-gray-dark">申报材料堆砌、评审标准不清晰、企业自评通过率不足40%</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">派富AI赋能点</h4>
+                                    <p class="text-sm text-gray-dark">申报时间节点监控+AI模拟评审+动态对标行业标杆</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">定价</h4>
+                                    <p class="text-sm text-gray-dark">8万元（含2次模拟评审）</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-semibold mb-3">核心服务</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-dark space-y-2">
+                                    <li>AI自评诊断：输入企业数据，AI生成《专精特新匹配度报告》（含差距分析）</li>
+                                    <li>智能辅导节点生成：AI根据企业数据自动生成申报材料框架</li>
+                                    <li>模拟评审：AI模拟专家提问（覆盖技术先进性、市场竞争力等10+维度）提供答辩话术</li>
+                                    <li>政策动态追踪：申报期间实时推送地方政策变动</li>
+                                    <li>专属服务群：及时响应问题，监控解决方案时间节点</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-semibold mb-3">量化价值</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-dark space-y-2">
+                                    <li>提升成功率：试点企业申报成功率从35%→75%（2023年杭州试点数据）</li>
+                                    <li>缩短周期：材料准备时间从3个月→1.5个月</li>
+                                    <li>降低试错成本：避免因材料问题重复申报（平均节省5万/次）</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-light">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-lg font-bold text-danger">¥80,000</span>
+                                    <span class="text-sm text-gray-medium line-through">¥120,000</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <button class="px-6 py-2 text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">了解详情</button>
+                                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即购买</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 上市包 -->
+                        <div id="ipo-package" class="product-card border border-gray-light rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4">上市包</h3>
+                            <p class="text-sm text-gray-medium mb-6">解决“荣誉项目少、专利数量不足”痛点（针对拟上市/融资企业）</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold mb-3">目标客户</h4>
+                                    <p class="text-sm text-gray-dark">计划IPO/Pre-A轮以上融资的科技企业（占高成长性企业15%）</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">核心痛点</h4>
+                                    <p class="text-sm text-gray-dark">荣誉资质少影响估值、专利数量不足被问询、融资进度延迟</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">派富AI赋能点</h4>
+                                    <p class="text-sm text-gray-dark">AI定制荣誉申报路径+专利数量提升策略+资本对接</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">定价</h4>
+                                    <p class="text-sm text-gray-dark">10万元/年（含3项荣誉申报+50项专利规划）</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-semibold mb-3">核心服务</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-dark space-y-2">
+                                    <li>荣誉项目智能规划：AI分析企业所在区域/行业，定制《荣誉申报路线图》</li>
+                                    <li>专利数量提升：AI挖掘企业技术亮点，生成《专利布局方案》（含50项可申请专利点+快速申请通道建议）</li>
+                                    <li>资本对接服务：推荐匹配的VC/券商（基于企业技术领域+专利数据）</li>
+                                    <li>AI合规审计：上市前研发合规风险扫描（避免IPO被否）</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="font-semibold mb-3">量化价值</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-dark space-y-2">
+                                    <li>提升估值：荣誉+专利数量增加，融资估值平均提升20%（2023年科创板企业数据）</li>
+                                    <li>缩短上市周期：申报材料准备时间减少50%</li>
+                                    <li>规避IPO风险：研发合规问题发现率100%（AI审计）</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-light">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-lg font-bold text-danger">¥100,000/年</span>
+                                    <span class="text-sm text-gray-medium line-through">¥150,000/年</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <button class="px-6 py-2 text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">了解详情</button>
+                                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即购买</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 专项解决包 -->
+                        <div id="special-package" class="product-card border border-gray-light rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4">专项解决包</h3>
+                            <p class="text-sm text-gray-medium mb-6">解决“研发合规混乱痛点”</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <h4 class="font-semibold mb-3">目标客户</h4>
+                                    <p class="text-sm text-gray-dark">建筑企业、软件企业、制造业企业，有数据安全/知识产权风险的企业（占科技企业30%）</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">核心痛点</h4>
+                                    <p class="text-sm text-gray-dark">研发流程无标准、合规风险高、内部系统割裂导致效率低</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">派富AI赋能点</h4>
+                                    <p class="text-sm text-gray-dark">AI实时合规监控+低代码SaaS平台搭建</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3">保障</h4>
+                                    <p class="text-sm text-gray-dark">派富AI已训练研发合规规则库（覆盖ISO/GB标准），扫描准确率95%+。SaaS平台采用低代码框架，无需企业IT团队深度介入</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-light">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-lg font-bold text-danger">¥60,000/年</span>
+                                    <span class="text-sm text-gray-medium line-through">¥90,000/年</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <button class="px-6 py-2 text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors">了解详情</button>
+                                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">立即购买</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧边栏 -->
+            <div class="w-64 flex-shrink-0">
+                <div class="space-y-6">
+                    <!-- 热搜 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold">热搜</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">高企认定申报</p>
+                                <p class="text-xs text-gray-medium">专业团队全程代办，提高通过率</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">专精特新申报</p>
+                                <p class="text-xs text-gray-medium">AI模拟评审，提升成功率</p>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">专利申请</p>
+                                <p class="text-xs text-gray-medium">快速申请通道，专业服务</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 推荐产品 -->
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold">推荐产品</h3>
+                            <button class="text-xs text-primary hover:underline">更多</button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">政策匹配工具</p>
+                                <p class="text-xs text-gray-medium">AI智能匹配政策，快速获得补贴机会</p>
+                                <button class="mt-2 text-xs text-primary hover:underline">免费试用</button>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">研发合规体检</p>
+                                <p class="text-xs text-gray-medium">AI扫描研发合规风险，避免法律问题</p>
+                                <button class="mt-2 text-xs text-primary hover:underline">免费试用</button>
+                            </div>
+                            <div class="card-hover p-3 bg-gray-50 rounded-lg">
+                                <p class="text-sm font-medium mb-1">专利点挖掘</p>
+                                <p class="text-xs text-gray-medium">AI分析技术亮点，生成专利申请建议</p>
+                                <button class="mt-2 text-xs text-primary hover:underline">免费试用</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="bg-white border-t border-gray-light mt-8 py-6">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-6 mb-4">
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">关于我们</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">服务条款</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">隐私政策</a>
+                    <a href="#" class="text-sm text-gray-dark hover:text-primary transition-colors">联系我们</a>
+                </div>
+                <p class="text-xs text-gray-medium">
+                    © 2026 科派 - 湖北科创大数据平台 版权所有
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动到产品位置
+        function scrollToProduct(productId) {
+            const productElement = document.getElementById(productId);
+            if (productElement) {
+                // 移除所有按钮的active状态
+                document.querySelectorAll('.flex.items-center.gap-4 button').forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('text-gray-dark', 'border', 'border-gray-light');
+                });
+                // 添加当前按钮的active状态
+                event.target.classList.remove('text-gray-dark', 'border', 'border-gray-light');
+                event.target.classList.add('bg-primary', 'text-white');
+                
+                // 滚动到产品位置
+                productElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // 产品分类导航点击事件
+        document.querySelectorAll('.flex.items-center.gap-4 button').forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有按钮的active状态
+                document.querySelectorAll('.flex.items-center.gap-4 button').forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('text-gray-dark', 'border', 'border-gray-light');
+                });
+                // 添加当前按钮的active状态
+                this.classList.remove('text-gray-dark', 'border', 'border-gray-light');
+                this.classList.add('bg-primary', 'text-white');
+                
+                // 这里可以添加产品切换逻辑
+                console.log('切换到产品:', this.textContent.trim());
+            });
+        });
+
+        // 侧边栏项点击事件
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 产品卡片点击事件
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // 排除按钮点击
+                if (e.target.tagName === 'BUTTON') return;
+                
+                const title = this.querySelector('h3');
+                if (title) {
+                    console.log('查看产品详情:', title.textContent);
+                }
+            });
+        });
+
+        // 购买按钮点击事件
+        document.querySelectorAll('button:contains("立即购买")').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.closest('.product-card').querySelector('h3').textContent;
+                console.log('购买产品:', productName);
+            });
+        });
+
+        // 了解详情按钮点击事件
+        document.querySelectorAll('button:contains("了解详情")').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.closest('.product-card').querySelector('h3').textContent;
+                console.log('了解产品详情:', productName);
+            });
+        });
+    </script>
+</body>
+</html>

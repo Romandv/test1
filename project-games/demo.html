@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据收集者 - 创新小游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .game-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 100;
+        }
+        
+        .score {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timer {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .player {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.8);
+            transition: transform 0.1s ease;
+        }
+        
+        .data-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(67, 233, 123, 0.8);
+            animation: pulse 2s infinite;
+        }
+        
+        .obstacle {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 154, 158, 0.8);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 200;
+            display: none;
+        }
+        
+        .game-over h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        
+        .game-over p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+        }
+        
+        .start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+        }
+        
+        .start-screen h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .start-screen p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <div class="score">分数: <span id="score">0</span></div>
+            <div class="timer">时间: <span id="timer">60</span></div>
+        </div>
+        
+        <div class="player" id="player"></div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>游戏结束!</h2>
+            <p>最终分数: <span id="finalScore">0</span></p>
+            <button class="btn" onclick="restartGame()">重新开始</button>
+        </div>
+        
+        <div class="start-screen" id="startScreen">
+            <h1>数据收集者</h1>
+            <p>控制你的数据收集器，收集漂浮的数据流，避开红色障碍物。
+            <br>时间有限，看看你能收集多少数据！</p>
+            <button class="btn" onclick="startGame()">开始游戏</button>
+        </div>
+        
+        <div class="instructions">
+            使用方向键或 WASD 控制移动
+        </div>
+    </div>
+    
+    <script>
+        const gameContainer = document.querySelector('.game-container');
+        const player = document.getElementById('player');
+        const scoreElement = document.getElementById('score');
+        const timerElement = document.getElementById('timer');
+        const gameOverElement = document.getElementById('gameOver');
+        const finalScoreElement = document.getElementById('finalScore');
+        const startScreen = document.getElementById('startScreen');
+        
+        let score = 0;
+        let timeLeft = 60;
+        let gameInterval;
+        let timerInterval;
+        let dataElements = [];
+        let obstacles = [];
+        let keys = {};
+        
+        // 玩家初始位置
+        let playerX = 375;
+        let playerY = 500;
+        
+        // 游戏设置
+        const PLAYER_SPEED = 5;
+        const DATA_SPAWN_RATE = 1000;
+        const OBSTACLE_SPAWN_RATE = 1500;
+        const DATA_VALUE = 10;
+        const OBSTACLE_DAMAGE = 20;
+        
+        // 键盘控制
+        window.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+        });
+        
+        window.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+        
+        // 开始游戏
+        function startGame() {
+            startScreen.style.display = 'none';
+            resetGame();
+            gameInterval = setInterval(gameLoop, 20);
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            // 生成数据元素
+            setInterval(() => {
+                spawnDataElement();
+            }, DATA_SPAWN_RATE);
+            
+            // 生成障碍物
+            setInterval(() => {
+                spawnObstacle();
+            }, OBSTACLE_SPAWN_RATE);
+        }
+        
+        // 重置游戏
+        function resetGame() {
+            score = 0;
+            timeLeft = 60;
+            scoreElement.textContent = score;
+            timerElement.textContent = timeLeft;
+            playerX = 375;
+            playerY = 500;
+            updatePlayerPosition();
+            
+            // 清除现有元素
+            dataElements.forEach(element => element.remove());
+            obstacles.forEach(obstacle => obstacle.remove());
+            dataElements = [];
+            obstacles = [];
+            
+            gameOverElement.style.display = 'none';
+        }
+        
+        // 游戏主循环
+        function gameLoop() {
+            // 处理玩家移动
+            handlePlayerMovement();
+            
+            // 更新数据元素位置
+            updateDataElements();
+            
+            // 更新障碍物位置
+            updateObstacles();
+            
+            // 检测碰撞
+            checkCollisions();
+        }
+        
+        // 处理玩家移动
+        function handlePlayerMovement() {
+            if (keys['ArrowUp'] || keys['w'] || keys['W']) {
+                playerY = Math.max(80, playerY - PLAYER_SPEED);
+            }
+            if (keys['ArrowDown'] || keys['s'] || keys['S']) {
+                playerY = Math.min(550, playerY + PLAYER_SPEED);
+            }
+            if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
+                playerX = Math.max(0, playerX - PLAYER_SPEED);
+            }
+            if (keys['ArrowRight'] || keys['d'] || keys['D']) {
+                playerX = Math.min(750, playerX + PLAYER_SPEED);
+            }
+            
+            updatePlayerPosition();
+        }
+        
+        // 更新玩家位置
+        function updatePlayerPosition() {
+            player.style.left = playerX + 'px';
+            player.style.top = playerY + 'px';
+        }
+        
+        // 生成数据元素
+        function spawnDataElement() {
+            const dataElement = document.createElement('div');
+            dataElement.className = 'data-element';
+            dataElement.style.left = Math.random() * 770 + 'px';
+            dataElement.style.top = '-30px';
+            gameContainer.appendChild(dataElement);
+            dataElements.push(dataElement);
+        }
+        
+        // 生成障碍物
+        function spawnObstacle() {
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle';
+            obstacle.style.left = Math.random() * 760 + 'px';
+            obstacle.style.top = '-40px';
+            gameContainer.appendChild(obstacle);
+            obstacles.push(obstacle);
+        }
+        
+        // 更新数据元素位置
+        function updateDataElements() {
+            dataElements.forEach((element, index) => {
+                const top = parseFloat(element.style.top);
+                if (top > 600) {
+                    element.remove();
+                    dataElements.splice(index, 1);
+                } else {
+                    element.style.top = (top + 2) + 'px';
+                }
+            });
+        }
+        
+        // 更新障碍物位置
+        function updateObstacles() {
+            obstacles.forEach((obstacle, index) => {
+                const top = parseFloat(obstacle.style.top);
+                if (top > 600) {
+                    obstacle.remove();
+                    obstacles.splice(index, 1);
+                } else {
+                    obstacle.style.top = (top + 3) + 'px';
+                }
+            });
+        }
+        
+        // 检测碰撞
+        function checkCollisions() {
+            // 检测与数据元素的碰撞
+            dataElements.forEach((element, index) => {
+                const rect1 = player.getBoundingClientRect();
+                const rect2 = element.getBoundingClientRect();
+                
+                if (rect1.left < rect2.right && rect1.right > rect2.left &&
+                    rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
+                    score += DATA_VALUE;
+                    scoreElement.textContent = score;
+                    element.remove();
+                    dataElements.splice(index, 1);
+                    
+                    // 添加收集特效
+                    createCollectionEffect(element.style.left, element.style.top);
+                }
+            });
+            
+            // 检测与障碍物的碰撞
+            obstacles.forEach((obstacle, index) => {
+                const rect1 = player.getBoundingClientRect();
+                const rect2 = obstacle.getBoundingClientRect();
+                
+                if (rect1.left < rect2.right && rect1.right > rect2.left &&
+                    rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
+                    score = Math.max(0, score - OBSTACLE_DAMAGE);
+                    scoreElement.textContent = score;
+                    obstacle.remove();
+                    obstacles.splice(index, 1);
+                    
+                    // 添加碰撞特效
+                    createCollisionEffect(obstacle.style.left, obstacle.style.top);
+                }
+            });
+        }
+        
+        // 创建收集特效
+        function createCollectionEffect(x, y) {
+            const effect = document.createElement('div');
+            effect.style.position = 'absolute';
+            effect.style.left = x;
+            effect.style.top = y;
+            effect.style.width = '30px';
+            effect.style.height = '30px';
+            effect.style.background = 'radial-gradient(circle, rgba(79,172,254,0.8) 0%, rgba(0,242,254,0) 70%)';
+            effect.style.borderRadius = '50%';
+            effect.style.animation = 'pulse 0.5s ease-out forwards';
+            gameContainer.appendChild(effect);
+            
+            setTimeout(() => {
+                effect.remove();
+            }, 500);
+        }
+        
+        // 创建碰撞特效
+        function createCollisionEffect(x, y) {
+            const effect = document.createElement('div');
+            effect.style.position = 'absolute';
+            effect.style.left = x;
+            effect.style.top = y;
+            effect.style.width = '40px';
+            effect.style.height = '40px';
+            effect.style.background = 'radial-gradient(circle, rgba(255,107,107,0.8) 0%, rgba(250,208,196,0) 70%)';
+            effect.style.borderRadius = '50%';
+            effect.style.animation = 'pulse 0.5s ease-out forwards';
+            gameContainer.appendChild(effect);
+            
+            setTimeout(() => {
+                effect.remove();
+            }, 500);
+        }
+        
+        // 更新计时器
+        function updateTimer() {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }
+        
+        // 结束游戏
+        function endGame() {
+            clearInterval(gameInterval);
+            clearInterval(timerInterval);
+            finalScoreElement.textContent = score;
+            gameOverElement.style.display = 'block';
+        }
+        
+        // 重新开始游戏
+        function restartGame() {
+            startGame();
+        }
+    </script>
+</body>
+</html>
